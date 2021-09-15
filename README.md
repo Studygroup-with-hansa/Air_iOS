@@ -1,2 +1,2 @@
 # iOS
-iOS for Studygroup with Hansa project
+iOS for Air Project
