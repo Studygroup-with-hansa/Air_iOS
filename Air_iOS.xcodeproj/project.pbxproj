@@ -14,6 +14,8 @@
 		6229F24F26F1713E00B51EBA /* Air_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F24E26F1713E00B51EBA /* Air_iOSTests.swift */; };
 		6229F25A26F1713E00B51EBA /* Air_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F25926F1713E00B51EBA /* Air_iOSUITests.swift */; };
 		6229F26E26F1B84500B51EBA /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F26D26F1B84500B51EBA /* AppServices.swift */; };
+		6229F27126F1BF7C00B51EBA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F27026F1BF7C00B51EBA /* Network.swift */; };
+		6229F27426F1D2CF00B51EBA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F27326F1D2CF00B51EBA /* DateFormatter.swift */; };
 		BFE942F5FC48C5191A355A21 /* Pods_Air_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */; };
 		C8403D7F7883670F9F1D8E11 /* Pods_Air_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0498C5F8C53219455FCD9D6 /* Pods_Air_iOSTests.framework */; };
 		F1405EF075B0AD9561499FEA /* Pods_Air_iOS_Air_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0233958DCE324D658633647D /* Pods_Air_iOS_Air_iOSUITests.framework */; };
@@ -54,6 +56,8 @@
 		6229F25926F1713E00B51EBA /* Air_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Air_iOSUITests.swift; sourceTree = "<group>"; };
 		6229F25B26F1713E00B51EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6229F26D26F1B84500B51EBA /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
+		6229F27026F1BF7C00B51EBA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		6229F27326F1D2CF00B51EBA /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD06138C1C45249565EF0E /* Pods-Air_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Air_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Air_iOSTests/Pods-Air_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		E0498C5F8C53219455FCD9D6 /* Pods_Air_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +148,8 @@
 			children = (
 				6229F26B26F1731000B51EBA /* Application */,
 				6229F26C26F1732300B51EBA /* ViewController */,
+				6229F26F26F1BF5C00B51EBA /* Network */,
+				6229F27226F1D2A700B51EBA /* Extension */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -180,6 +186,22 @@
 				6229F23B26F1713A00B51EBA /* ViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6229F26F26F1BF5C00B51EBA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6229F27026F1BF7C00B51EBA /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6229F27226F1D2A700B51EBA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6229F27326F1D2CF00B51EBA /* DateFormatter.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		A1F1E8471230A83035F1B352 /* Pods */ = {
@@ -444,7 +466,9 @@
 			files = (
 				6229F26E26F1B84500B51EBA /* AppServices.swift in Sources */,
 				6229F23C26F1713A00B51EBA /* ViewController.swift in Sources */,
+				6229F27126F1BF7C00B51EBA /* Network.swift in Sources */,
 				6229F23826F1713A00B51EBA /* AppDelegate.swift in Sources */,
+				6229F27426F1D2CF00B51EBA /* DateFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
