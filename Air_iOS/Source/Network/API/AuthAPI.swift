@@ -8,15 +8,16 @@
 import Moya
 
 enum AuthAPI {
-    case requestEmail(_ email: String)
+    case requestEmailCode(_ email: String)
     case sendEmailCode(_ email: String, _ code: String)
 }
 
 extension AuthAPI: BaseAPI {
     var path: String {
         switch self {
-        case .requestEmail:
+        case .requestEmailCode:
             return "/user/manage/signin/"
+            
         case .sendEmailCode:
             return "/user/manage/signin/"
         }
@@ -30,7 +31,7 @@ extension AuthAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case let .requestEmail(email):
+        case let .requestEmailCode(email):
             return [
                 "email" : email
             ]
@@ -44,7 +45,7 @@ extension AuthAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .requestEmail:
+        case .requestEmailCode:
             return .get
             
         case .sendEmailCode:
