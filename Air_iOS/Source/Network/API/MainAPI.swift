@@ -26,7 +26,7 @@ extension MainAPI: BaseAPI {
             return "/user/timer/start/"
             
         case .stopTimer:
-            return "/user/timer/start/"
+            return "/user/timer/stop/"
             
         case .getSubjectList:
             return "/user/data/subject/"
