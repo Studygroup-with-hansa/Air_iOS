@@ -45,7 +45,7 @@ extension MainAPI: BaseAPI {
     
     var headers: [String : String]? {
         return [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type" : "application/x-www-form-urlencoded"
         ]
     }
     
