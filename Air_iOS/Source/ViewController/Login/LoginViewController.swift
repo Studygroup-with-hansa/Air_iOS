@@ -16,10 +16,19 @@ final class LoginViewController: BaseViewController, View {
     
     // MARK: - Constants
     fileprivate struct Metric {
+        // Background
         static let backgroundRatio = 2.75.f
         
+        // View
+        static let viewSide = 30.f
+        
+        // Image
         static let logoImageHeight = 62.f
         static let logoImageWidth = 55.f
+        
+        // Email
+        static let emailTextFieldTop = 50.f
+        static let emailTextFieldHeight = 60.f
     }
     
     fileprivate struct Font {
@@ -36,6 +45,11 @@ final class LoginViewController: BaseViewController, View {
     let logoImage = UIImageView().then {
         $0.image = UIImage.init(named: "Air_logo")
         $0.tintColor = .white
+    }
+    
+    let emailTextField = AirTextField().then {
+        $0.titleLabel.text = "이메일"
+        $0.placeholder.text = "이메일을 입력해주세요"
     }
     
     // MARK: - Inintializing
@@ -60,6 +74,7 @@ final class LoginViewController: BaseViewController, View {
         
         self.view.addSubview(self.backgroundView)
         self.backgroundView.addSubview(self.logoImage)
+        self.view.addSubview(self.emailTextField)
     }
     
     override func setupConstraints() {
@@ -76,6 +91,13 @@ final class LoginViewController: BaseViewController, View {
             $0.center.equalToSuperview()
             $0.height.equalTo(Metric.logoImageHeight)
             $0.width.equalTo(Metric.logoImageWidth)
+        }
+        
+        self.emailTextField.snp.makeConstraints {
+            $0.top.equalTo(self.backgroundView.snp.bottom).offset(Metric.emailTextFieldTop)
+            $0.left.equalToSuperview().offset(Metric.viewSide)
+            $0.right.equalToSuperview().offset(-85)
+            $0.height.equalTo(Metric.emailTextFieldHeight)
         }
     }
     

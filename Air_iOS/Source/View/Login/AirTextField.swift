@@ -9,6 +9,7 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+import SwiftUI
 
 final class AirTextField: UIView {
     
@@ -17,38 +18,51 @@ final class AirTextField: UIView {
     
     // MARK: - Constants
     fileprivate struct Style {
-        static let textFieldRadius = 5.f
-        static let textFieldBorderWidth = 1.f
+        static let borderRadius = 5.f
+        static let borderWidth = 1.f
     }
     
     fileprivate struct Metric {
-        static let textFieldTop = 5.f
+        // Title
+        static let titleHeight = 15.f
+        
+        // Border
+        static let borderTop = 5.f
+        
+        // Side
+        static let side = 10.f
     }
     
     fileprivate struct Font {
         static let titleFont = UIFont.systemFont(ofSize: 9, weight: .regular)
-        static let placeholderFont = UIFont.systemFont(ofSize: 12, weight: .regular)
+        static let textFieldFont = UIFont.systemFont(ofSize: 12, weight: .regular)
     }
     
     // MARK: - UI
-    let textField = UITextField().then {
-        $0.layer.cornerRadius = Style.textFieldRadius
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.layer.borderWidth = Style.textFieldBorderWidth
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-    }
-    
-    let titleLabel = UILabel().then {
+    var titleLabel = UILabel().then {
         $0.textAlignment = .left
         $0.adjustsFontSizeToFitWidth = true
         $0.font = Font.titleFont
-        $0.text = "이메일"
     }
     
-    let placeholder = UILabel().then {
-        $0.text = "이메일을 입력해주세요"
-        $0.font = Font.placeholderFont
+    let border = UIView().then {
+        $0.backgroundColor = .clear
+        $0.layer.cornerRadius = Style.borderRadius
+        $0.layer.borderWidth = Style.borderWidth
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    let textField = UITextField().then {
+        $0.borderStyle = .none
+        $0.tintColor = UIColor.init(named: "MainColor")
+        $0.font = Font.textFieldFont
+        $0.adjustsFontSizeToFitWidth = true
+    }
+    
+    var placeholder = UILabel().then {
+        $0.font = Font.textFieldFont
         $0.textColor = UIColor.init(named: "TextFieldPlaceholderColor")!
+        $0.adjustsFontSizeToFitWidth = true
     }
     
     // MARK: - Inititalizing
@@ -67,23 +81,30 @@ final class AirTextField: UIView {
         super.layoutSubviews()
         
         self.addSubview(self.titleLabel)
-        self.addSubview(self.textField)
-        self.textField.addSubview(self.placeholder)
+        self.addSubview(self.border)
+        self.border.addSubview(self.textField)
+        self.border.addSubview(self.placeholder)
         
         self.titleLabel.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(15)
+            $0.height.equalTo(Metric.titleHeight)
         }
         
-        self.textField.snp.makeConstraints {
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(Metric.textFieldTop)
+        self.border.snp.makeConstraints {
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(Metric.borderTop)
             $0.bottom.left.right.equalToSuperview()
         }
         
+        self.textField.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.left.equalToSuperview().offset(Metric.side)
+            $0.right.equalToSuperview().offset(-Metric.side)
+        }
+        
         self.placeholder.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(10)
-            $0.right.equalToSuperview().offset(-10)
+            $0.top.bottom.equalToSuperview()
+            $0.left.equalToSuperview().offset(Metric.side)
+            $0.right.equalToSuperview().offset(-Metric.side)
         }
     }
     
