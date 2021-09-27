@@ -9,7 +9,6 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import SwiftUI
 
 final class AirTextField: UIView {
     
