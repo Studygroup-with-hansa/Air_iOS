@@ -11,7 +11,8 @@ import SwiftUI
 struct ViewControllerPreview: PreviewProvider {
     static var previews: some View {
         let reactor = LoginViewReactor()
-        LoginViewController(reactor: reactor).showPreview(.iPhone13ProMax)
+        LoginViewController(reactor: reactor).showPreview(.iPhone13Pro)
+        LoginViewController(reactor: reactor).showPreview(.iPodTouch)
     }
 }
 
