@@ -28,6 +28,7 @@
 		62A9A40027019457001E2343 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A3FF27019457001E2343 /* Preview.swift */; };
 		62A9A40327019690001E2343 /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A40227019690001E2343 /* LoginViewReactor.swift */; };
 		62A9A40527019729001E2343 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A40427019729001E2343 /* LoginViewController.swift */; };
+		62A9A4072701A8F4001E2343 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62A9A4062701A8F4001E2343 /* Colors.xcassets */; };
 		62EE3752270171E000ABFCD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE3751270171E000ABFCD2 /* BaseViewController.swift */; };
 		BFE942F5FC48C5191A355A21 /* Pods_Air_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */; };
 		C8403D7F7883670F9F1D8E11 /* Pods_Air_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0498C5F8C53219455FCD9D6 /* Pods_Air_iOSTests.framework */; };
@@ -83,6 +84,7 @@
 		62A9A3FF27019457001E2343 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		62A9A40227019690001E2343 /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
 		62A9A40427019729001E2343 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		62A9A4062701A8F4001E2343 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		62EE3751270171E000ABFCD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD06138C1C45249565EF0E /* Pods-Air_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Air_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Air_iOSTests/Pods-Air_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +190,9 @@
 		6229F26926F172A300B51EBA /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6229F24026F1713D00B51EBA /* Assets.xcassets */,
+				62A9A4062701A8F4001E2343 /* Colors.xcassets */,
+				6229F24226F1713D00B51EBA /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -195,8 +200,6 @@
 		6229F26A26F172B900B51EBA /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6229F24026F1713D00B51EBA /* Assets.xcassets */,
-				6229F24226F1713D00B51EBA /* LaunchScreen.storyboard */,
 				6229F24526F1713D00B51EBA /* Info.plist */,
 			);
 			path = SupportingFiles;
@@ -422,6 +425,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62A9A4072701A8F4001E2343 /* Colors.xcassets in Resources */,
 				6229F24426F1713D00B51EBA /* LaunchScreen.storyboard in Resources */,
 				6229F24126F1713D00B51EBA /* Assets.xcassets in Resources */,
 			);
