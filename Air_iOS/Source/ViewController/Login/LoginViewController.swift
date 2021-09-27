@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactorKit
-import CGFloatLiteral
 
 final class LoginViewController: BaseViewController, View {
     
@@ -17,7 +16,7 @@ final class LoginViewController: BaseViewController, View {
     
     // MARK: - Constants
     fileprivate struct Metric {
-        static let backgroundRatio = 2.5.f
+        static let backgroundRatio = 2.75.f
         
         static let logoImageHeight = 62.f
         static let logoImageWidth = 55.f
