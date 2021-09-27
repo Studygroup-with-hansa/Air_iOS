@@ -29,6 +29,10 @@ final class LoginViewController: BaseViewController, View {
         // Email
         static let emailTextFieldTop = 50.f
         static let emailTextFieldHeight = 60.f
+        
+        // Code
+        static let codeTextFieldTop = 10.f
+        static let codeTextFieldHeight = 60.f
     }
     
     fileprivate struct Font {
@@ -50,6 +54,11 @@ final class LoginViewController: BaseViewController, View {
     let emailTextField = AirTextField().then {
         $0.titleLabel.text = "이메일"
         $0.placeholder.text = "이메일을 입력해주세요"
+    }
+    
+    let codeTextField = AirTextField().then {
+        $0.titleLabel.text = "인증코드"
+        $0.placeholder.text = "인증 코드를 입력해주세요"
     }
     
     // MARK: - Inintializing
@@ -75,6 +84,7 @@ final class LoginViewController: BaseViewController, View {
         self.view.addSubview(self.backgroundView)
         self.backgroundView.addSubview(self.logoImage)
         self.view.addSubview(self.emailTextField)
+        self.view.addSubview(self.codeTextField)
     }
     
     override func setupConstraints() {
@@ -98,6 +108,13 @@ final class LoginViewController: BaseViewController, View {
             $0.left.equalToSuperview().offset(Metric.viewSide)
             $0.right.equalToSuperview().offset(-85)
             $0.height.equalTo(Metric.emailTextFieldHeight)
+        }
+        
+        self.codeTextField.snp.makeConstraints {
+            $0.top.equalTo(self.emailTextField.snp.bottom).offset(Metric.codeTextFieldTop)
+            $0.left.equalToSuperview().offset(Metric.viewSide)
+            $0.right.equalToSuperview().offset(-Metric.viewSide)
+            $0.height.equalTo(Metric.codeTextFieldHeight)
         }
     }
     
