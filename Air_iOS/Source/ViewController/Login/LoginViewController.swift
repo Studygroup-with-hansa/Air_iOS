@@ -56,6 +56,8 @@ final class LoginViewController: BaseViewController, View {
         $0.placeholder.text = "이메일을 입력해주세요"
     }
     
+    let sendCodeButton = SendCodeButton()
+    
     let codeTextField = AirTextField().then {
         $0.titleLabel.text = "인증코드"
         $0.placeholder.text = "인증 코드를 입력해주세요"
@@ -84,6 +86,7 @@ final class LoginViewController: BaseViewController, View {
         self.view.addSubview(self.backgroundView)
         self.backgroundView.addSubview(self.logoImage)
         self.view.addSubview(self.emailTextField)
+        self.view.addSubview(self.sendCodeButton)
         self.view.addSubview(self.codeTextField)
     }
     
@@ -92,8 +95,7 @@ final class LoginViewController: BaseViewController, View {
         
         self.backgroundView.snp.makeConstraints {
             // equal to top
-            $0.top.equalToSuperview().offset(-(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
-            $0.leading.trailing.equalToSuperview()
+            $0.top.right.left.equalToSuperview()
             $0.height.equalToSuperview().dividedBy(Metric.backgroundRatio)
         }
         
@@ -106,8 +108,15 @@ final class LoginViewController: BaseViewController, View {
         self.emailTextField.snp.makeConstraints {
             $0.top.equalTo(self.backgroundView.snp.bottom).offset(Metric.emailTextFieldTop)
             $0.left.equalToSuperview().offset(Metric.viewSide)
-            $0.right.equalToSuperview().offset(-85)
+            $0.right.equalTo(self.sendCodeButton.snp.left).offset(-15)
             $0.height.equalTo(Metric.emailTextFieldHeight)
+        }
+        
+        self.sendCodeButton.snp.makeConstraints {
+            $0.bottom.equalTo(emailTextField)
+            $0.right.equalToSuperview().offset(-Metric.viewSide)
+            $0.height.equalTo(Metric.emailTextFieldHeight - 20)
+            $0.width.equalTo(55)
         }
         
         self.codeTextField.snp.makeConstraints {

@@ -13,10 +13,11 @@ final class SendCodeButton: UIButton {
     fileprivate struct Style {
         static let borderWidth = 1.f
         static let cornerRadius = 5.f
+        static let MainColor = UIColor.init(named: "MainColor")
     }
     
     fileprivate struct Font {
-        
+        static let buttonTitle = UIFont.systemFont(ofSize: 12, weight: .regular)
     }
     
     // MARK: - UI
@@ -36,7 +37,9 @@ final class SendCodeButton: UIButton {
         super.layoutSubviews()
         
         self.setTitle("인증", for: .normal)
-        self.setTitleColor(UIColor.init(named: "MainColor"), for: .normal)
+        self.titleLabel?.font = Font.buttonTitle
+        self.setTitleColor(Style.MainColor, for: .normal)
+        self.setTitleColor(.white, for: .highlighted)
         self.layer.cornerRadius = Style.cornerRadius
         self.layer.borderColor = UIColor.init(named: "MainColor")!.cgColor
         self.layer.borderWidth = Style.borderWidth
@@ -44,7 +47,9 @@ final class SendCodeButton: UIButton {
     
     override public var isHighlighted: Bool {
         didSet {
-            
+            UIView.animate(withDuration: 0.3) {
+                self.backgroundColor = self.isHighlighted ? Style.MainColor : .clear
+            }
         }
     }
 }
