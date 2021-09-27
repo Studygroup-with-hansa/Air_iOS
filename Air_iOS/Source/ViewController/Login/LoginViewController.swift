@@ -9,6 +9,7 @@
 import UIKit
 
 import ReactorKit
+import CGFloatLiteral
 
 final class LoginViewController: BaseViewController, View {
     
@@ -16,7 +17,10 @@ final class LoginViewController: BaseViewController, View {
     
     // MARK: - Constants
     fileprivate struct Metric {
+        static let backgroundRatio = 2.5.f
         
+        static let logoImageHeight = 62.f
+        static let logoImageWidth = 55.f
     }
     
     fileprivate struct Font {
@@ -26,6 +30,14 @@ final class LoginViewController: BaseViewController, View {
     // MARK: - Properties
     
     // MARK: - UI
+    let backgroundView = UIView().then {
+        $0.backgroundColor = .init(named: "MainColor")
+    }
+    
+    let logoImage = UIImageView().then {
+        $0.image = UIImage.init(named: "Air_logo")
+        $0.tintColor = .white
+    }
     
     // MARK: - Inintializing
     init(reactor: Reactor) {
@@ -47,11 +59,25 @@ final class LoginViewController: BaseViewController, View {
     override func setupLayout() {
         super.setupLayout()
         
+        self.view.addSubview(self.backgroundView)
+        self.backgroundView.addSubview(self.logoImage)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
         
+        self.backgroundView.snp.makeConstraints {
+            // equal to top
+            $0.top.equalToSuperview().offset(-(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalToSuperview().dividedBy(Metric.backgroundRatio)
+        }
+        
+        self.logoImage.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.height.equalTo(Metric.logoImageHeight)
+            $0.width.equalTo(Metric.logoImageWidth)
+        }
     }
     
     // MARK: - Configuring
