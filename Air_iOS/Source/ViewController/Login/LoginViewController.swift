@@ -33,6 +33,9 @@ final class LoginViewController: BaseViewController, View {
         // Code
         static let codeTextFieldTop = 10.f
         static let codeTextFieldHeight = 60.f
+        
+        // Login
+        static let loginButtonHeight = 40.f
     }
     
     fileprivate struct Font {
@@ -63,6 +66,11 @@ final class LoginViewController: BaseViewController, View {
         $0.placeholder.text = "인증 코드를 입력해주세요"
     }
     
+    let loginButton = AirPlainButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+    }
+    
     // MARK: - Inintializing
     init(reactor: Reactor) {
         super.init()
@@ -88,6 +96,7 @@ final class LoginViewController: BaseViewController, View {
         self.view.addSubview(self.emailTextField)
         self.view.addSubview(self.sendCodeButton)
         self.view.addSubview(self.codeTextField)
+        self.view.addSubview(self.loginButton)
     }
     
     override func setupConstraints() {
@@ -124,6 +133,13 @@ final class LoginViewController: BaseViewController, View {
             $0.left.equalToSuperview().offset(Metric.viewSide)
             $0.right.equalToSuperview().offset(-Metric.viewSide)
             $0.height.equalTo(Metric.codeTextFieldHeight)
+        }
+        
+        self.loginButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(Metric.viewSide)
+            $0.trailing.equalToSuperview().offset(-Metric.viewSide)
+            $0.height.equalTo(Metric.loginButtonHeight)
+            $0.bottom.equalToSafeArea(self.view).offset(-30)
         }
     }
     
