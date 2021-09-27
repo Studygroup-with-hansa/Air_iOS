@@ -22,6 +22,10 @@
 		6229F28426F320E300B51EBA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28326F320E300B51EBA /* ModelType.swift */; };
 		6229F28626F3216600B51EBA /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28526F3216600B51EBA /* Token.swift */; };
 		6229F28826F3229B00B51EBA /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28726F3229B00B51EBA /* Email.swift */; };
+		62A9A3FA2701930A001E2343 /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A3F92701930A001E2343 /* DeviceType.swift */; };
+		62A9A3FC2701940D001E2343 /* UIViewPreview.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A3FB2701940D001E2343 /* UIViewPreview.swift.swift */; };
+		62A9A3FE27019425001E2343 /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A3FD27019425001E2343 /* UIViewControllerPreview.swift */; };
+		62A9A40027019457001E2343 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A9A3FF27019457001E2343 /* Preview.swift */; };
 		62EE3752270171E000ABFCD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE3751270171E000ABFCD2 /* BaseViewController.swift */; };
 		BFE942F5FC48C5191A355A21 /* Pods_Air_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */; };
 		C8403D7F7883670F9F1D8E11 /* Pods_Air_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0498C5F8C53219455FCD9D6 /* Pods_Air_iOSTests.framework */; };
@@ -71,6 +75,10 @@
 		6229F28326F320E300B51EBA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		6229F28526F3216600B51EBA /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		6229F28726F3229B00B51EBA /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		62A9A3F92701930A001E2343 /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
+		62A9A3FB2701940D001E2343 /* UIViewPreview.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift.swift; sourceTree = "<group>"; };
+		62A9A3FD27019425001E2343 /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
+		62A9A3FF27019457001E2343 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		62EE3751270171E000ABFCD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD06138C1C45249565EF0E /* Pods-Air_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Air_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Air_iOSTests/Pods-Air_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +140,7 @@
 		6229F23626F1713A00B51EBA /* Air_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				62A9A3FF27019457001E2343 /* Preview.swift */,
 				6229F26726F1729800B51EBA /* Source */,
 				6229F26926F172A300B51EBA /* Resource */,
 				6229F26A26F172B900B51EBA /* SupportingFiles */,
@@ -167,6 +176,7 @@
 				6229F26F26F1BF5C00B51EBA /* Network */,
 				62EE37502701719B00ABFCD2 /* Base */,
 				6229F27226F1D2A700B51EBA /* Extension */,
+				62A9A3F8270192E7001E2343 /* Utils */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -247,6 +257,16 @@
 				6229F28726F3229B00B51EBA /* Email.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		62A9A3F8270192E7001E2343 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				62A9A3F92701930A001E2343 /* DeviceType.swift */,
+				62A9A3FB2701940D001E2343 /* UIViewPreview.swift.swift */,
+				62A9A3FD27019425001E2343 /* UIViewControllerPreview.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		62EE37502701719B00ABFCD2 /* Base */ = {
@@ -519,11 +539,15 @@
 			files = (
 				6229F26E26F1B84500B51EBA /* AppServices.swift in Sources */,
 				6229F28426F320E300B51EBA /* ModelType.swift in Sources */,
+				62A9A3FA2701930A001E2343 /* DeviceType.swift in Sources */,
 				6229F28826F3229B00B51EBA /* Email.swift in Sources */,
 				6229F27A26F210CD00B51EBA /* MainAPI.swift in Sources */,
 				6229F27F26F310D500B51EBA /* AuthService.swift in Sources */,
 				62EE3752270171E000ABFCD2 /* BaseViewController.swift in Sources */,
+				62A9A3FE27019425001E2343 /* UIViewControllerPreview.swift in Sources */,
 				6229F27126F1BF7C00B51EBA /* Network.swift in Sources */,
+				62A9A3FC2701940D001E2343 /* UIViewPreview.swift.swift in Sources */,
+				62A9A40027019457001E2343 /* Preview.swift in Sources */,
 				6229F27C26F2E6E200B51EBA /* AuthAPI.swift in Sources */,
 				6229F28626F3216600B51EBA /* Token.swift in Sources */,
 				6229F27826F20FC100B51EBA /* BaseAPI.swift in Sources */,
