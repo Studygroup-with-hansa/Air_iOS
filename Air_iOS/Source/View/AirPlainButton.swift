@@ -14,8 +14,8 @@ final class AirPlainButton: UIButton {
     fileprivate struct Style {
         static let cornerRadius = 5.f
         static let borderWidth = 1.f
-        static let mainColor = UIColor.init(named: "MainColor")
-        static let borderColor = UIColor.init(named: "ButtonBorderColor")
+        static let mainColor = R.color.mainColor()
+        static let borderColor = R.color.buttonBorderColor()
     }
     
     fileprivate struct Font {
@@ -47,8 +47,8 @@ final class AirPlainButton: UIButton {
     
     override public var isHighlighted: Bool {
         didSet {
-            UIView.animate(withDuration: 0.3) {
-                self.backgroundColor = self.backgroundColor?.withAlphaComponent(self.isHighlighted ? 0.7 : 1)
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = self.isHighlighted ? 0.6 : 1
             }
         }
     }

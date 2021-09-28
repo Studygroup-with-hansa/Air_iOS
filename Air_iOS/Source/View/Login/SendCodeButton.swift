@@ -13,7 +13,7 @@ final class SendCodeButton: UIButton {
     fileprivate struct Style {
         static let borderWidth = 1.f
         static let cornerRadius = 5.f
-        static let mainColor = UIColor.init(named: "MainColor")
+        static let mainColor = R.color.mainColor()
     }
     
     fileprivate struct Font {

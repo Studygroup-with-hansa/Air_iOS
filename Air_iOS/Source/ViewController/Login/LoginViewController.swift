@@ -47,11 +47,11 @@ final class LoginViewController: BaseViewController, View {
     
     // MARK: - UI
     let backgroundView = UIView().then {
-        $0.backgroundColor = .init(named: "MainColor")
+        $0.backgroundColor = R.color.mainColor()
     }
     
     let logoImage = UIImageView().then {
-        $0.image = UIImage.init(named: "Air_logo")
+        $0.image = R.image.air_logo()
         $0.tintColor = .white
     }
     
