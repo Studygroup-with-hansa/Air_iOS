@@ -19,6 +19,8 @@ final class AirTextField: UIView {
     fileprivate struct Style {
         static let borderRadius = 5.f
         static let borderWidth = 1.f
+        static let borderColor = UIColor.init(named: "TextFieldBorderColor")
+        static let titleColor = UIColor.init(named: "TextFieldTitleColor")
     }
     
     fileprivate struct Metric {
@@ -42,13 +44,14 @@ final class AirTextField: UIView {
         $0.textAlignment = .left
         $0.adjustsFontSizeToFitWidth = true
         $0.font = Font.titleFont
+        $0.textColor = Style.titleColor
     }
     
     let border = UIView().then {
         $0.backgroundColor = .clear
         $0.layer.cornerRadius = Style.borderRadius
         $0.layer.borderWidth = Style.borderWidth
-        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.layer.borderColor = Style.borderColor!.cgColor
     }
     
     let textField = UITextField().then {
