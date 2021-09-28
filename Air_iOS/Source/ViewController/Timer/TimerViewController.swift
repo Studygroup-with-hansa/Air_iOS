@@ -23,6 +23,10 @@ final class TimerViewController: BaseViewController, View {
         
         // To Do Label
         static let toDoLabelTop = 30.f
+        
+        // Stop Button
+        static let stopButtonTop = 35.f
+        static let stopButtonSize = 32.f
     }
     
     fileprivate struct Font {
@@ -41,6 +45,7 @@ final class TimerViewController: BaseViewController, View {
     
     fileprivate struct Style {
         static let mainColor = UIColor.init(named: "MainColor")
+        static let stopImage = UIImage.init(named: "StopTimer")
     }
     
     // MARK: - Properties
@@ -74,6 +79,13 @@ final class TimerViewController: BaseViewController, View {
         $0.textColor = .white
     }
     
+    let stopButton = UIButton(type: .system).then {
+        $0.setBackgroundImage(Style.stopImage, for: .normal)
+        $0.tintColor = .white
+        $0.layer.cornerRadius = Metric.stopButtonSize / 2
+        $0.layer.masksToBounds = true
+    }
+    
     // MARK: - Inintializing
     init(reactor: Reactor) {
         super.init()
@@ -99,6 +111,7 @@ final class TimerViewController: BaseViewController, View {
         self.view.addSubview(self.dateLabel)
         self.view.addSubview(self.subjectLabel)
         self.view.addSubview(self.toDoLabel)
+        self.view.addSubview(self.stopButton)
     }
     
     override func setupConstraints() {
@@ -121,6 +134,12 @@ final class TimerViewController: BaseViewController, View {
         self.toDoLabel.snp.makeConstraints {
             $0.centerX.equalToSafeArea(self.view)
             $0.top.equalTo(self.timeLabel.snp.bottom).offset(Metric.toDoLabelTop)
+        }
+        
+        self.stopButton.snp.makeConstraints {
+            $0.centerX.equalToSafeArea(self.view)
+            $0.top.equalTo(self.toDoLabel.snp.bottom).offset(Metric.stopButtonTop)
+            $0.width.height.equalTo(Metric.stopButtonSize)
         }
 
     }
