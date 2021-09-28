@@ -14,8 +14,8 @@ final class AirPlainButton: UIButton {
     fileprivate struct Style {
         static let cornerRadius = 5.f
         static let borderWidth = 1.f
-        static let mainColor = UIColor.init(named: "MainColor")
-        static let borderColor = UIColor.init(named: "ButtonBorderColor")
+        static let mainColor = R.color.mainColor()
+        static let borderColor = R.color.buttonBorderColor()
     }
     
     fileprivate struct Font {
