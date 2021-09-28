@@ -133,7 +133,7 @@ final class TimerViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        reactor.state.map { $0.time }
+        reactor.state.map { $0.time.toTimeString }
             .distinctUntilChanged()
             .bind(to: self.timeLabel.rx.text)
             .disposed(by: disposeBag)

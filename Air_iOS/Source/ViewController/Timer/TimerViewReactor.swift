@@ -25,11 +25,11 @@ final class TimerViewReactor: Reactor, Stepper {
     }
     
     struct State {
-        var time: String = ""
+        var time: Int
     }
     
     init() {
-        self.initialState = State()
+        self.initialState = State(time: 0)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -44,7 +44,7 @@ final class TimerViewReactor: Reactor, Stepper {
         
         switch mutation {
         case let .updateTime(seconds):
-            state.time = "\(seconds)"
+            state.time = seconds
         }
         
         return state
