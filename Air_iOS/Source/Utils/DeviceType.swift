@@ -8,7 +8,7 @@
 import Foundation
 
 enum DeviceType {
-    case iPhoneSE
+    case iPodTouch
     case iPhoneSE2
     case iPhone13Pro
     case iPhone13ProMax
@@ -16,8 +16,8 @@ enum DeviceType {
 
     func name() -> String {
         switch self {
-        case .iPhoneSE:
-            return "iPhone SE"
+        case .iPodTouch:
+            return "iPod touch (7th generation)"
         case .iPhoneSE2:
             return "iPhone SE (2nd generation)"
         case .iPhone13Pro:

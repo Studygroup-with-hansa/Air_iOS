@@ -12,6 +12,7 @@ import RxCocoa
 import RxFlow
 import RxViewController
 import SnapKit
+import CGFloatLiteral
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
