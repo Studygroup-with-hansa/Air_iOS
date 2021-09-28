@@ -105,7 +105,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 6 colors.
+  /// This `R.color` struct is generated, and contains static references to 7 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
@@ -113,6 +113,8 @@ struct R: Rswift.Validatable {
     static let buttonBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ButtonBorderColor")
     /// Color `MainColor`.
     static let mainColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "MainColor")
+    /// Color `ProfileBorderColor`.
+    static let profileBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ProfileBorderColor")
     /// Color `TextFieldBorderColor`.
     static let textFieldBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextFieldBorderColor")
     /// Color `TextFieldPlaceholderColor`.
@@ -144,6 +146,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func mainColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.mainColor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ProfileBorderColor", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func profileBorderColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.profileBorderColor, compatibleWith: traitCollection)
     }
     #endif
 
@@ -199,6 +210,14 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(watchOS)
+    /// `UIColor(named: "ProfileBorderColor", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func profileBorderColor(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.profileBorderColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
     /// `UIColor(named: "TextFieldBorderColor", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
     static func textFieldBorderColor(_: Void = ()) -> UIKit.UIColor? {
@@ -225,15 +244,24 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 1 images.
+  /// This `R.image` struct is generated, and contains static references to 2 images.
   struct image {
     /// Image `Air_logo`.
     static let air_logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "Air_logo")
+    /// Image `Profile`.
+    static let profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "Profile")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "Air_logo", bundle: ..., traitCollection: ...)`
     static func air_logo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.air_logo, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "Profile", bundle: ..., traitCollection: ...)`
+    static func profile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.profile, compatibleWith: traitCollection)
     }
     #endif
 

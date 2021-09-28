@@ -19,10 +19,28 @@ final class RegisterViewController: BaseViewController, View {
         static let logoHeight = 40.f
         static let logoWidth = 36.f
         static let logoBottom = 25.f
+        
+        // profile
+        static let profileTop = 30.f
+        static let profileSize = 80.f
+        
+        // Text Field
+        static let textFieldHeightRatio = 12.f
+        
+        // Nickname Text Field
+        static let nicknameTextFieldTop = 20.f
+        
+        // View
+        static let viewSide = 30.f
     }
     
     fileprivate struct Font {
-        
+        static let profileButonFont = UIFont.systemFont(ofSize: 9, weight: .regular)
+    }
+    
+    fileprivate struct Style {
+        static let profileBorderWidth = 1.f
+        static let profileBorderColor = R.color.profileBorderColor()
     }
     
     // MARK: - Properties
@@ -35,6 +53,25 @@ final class RegisterViewController: BaseViewController, View {
     let logoImage = UIImageView().then {
         $0.image = R.image.air_logo()
         $0.tintColor = .white
+    }
+    
+    let profileImage = UIImageView().then {
+        $0.image = R.image.profile()
+        $0.layer.cornerRadius = Metric.profileSize / 2
+        $0.layer.masksToBounds = true
+        $0.layer.borderWidth = Style.profileBorderWidth
+        $0.layer.borderColor = Style.profileBorderColor!.cgColor
+    }
+    
+    let profileButton = UIButton(type: .system).then {
+        $0.setTitle("프로필 사진 선택", for: .normal)
+        $0.setTitleColor(R.color.mainColor(), for: .normal)
+        $0.titleLabel?.font = Font.profileButonFont
+    }
+    
+    let nicknameTextField = AirTextField().then {
+        $0.titleLabel.text = "닉네임"
+        $0.placeholder.text = "닉네임을 입력해주세요"
     }
     
     // MARK: - Inintializing
@@ -59,6 +96,9 @@ final class RegisterViewController: BaseViewController, View {
         
         self.view.addSubview(self.backgroundView)
         self.backgroundView.addSubview(self.logoImage)
+        self.view.addSubview(self.profileImage)
+        self.view.addSubview(self.profileButton)
+        self.view.addSubview(self.nicknameTextField)
     }
     
     override func setupConstraints() {
@@ -74,6 +114,24 @@ final class RegisterViewController: BaseViewController, View {
             $0.bottom.equalToSuperview().offset(-Metric.logoBottom)
             $0.height.equalTo(Metric.logoHeight)
             $0.width.equalTo(Metric.logoWidth)
+        }
+        
+        self.profileImage.snp.makeConstraints {
+            $0.top.equalTo(self.backgroundView.snp.bottom).offset(Metric.profileTop)
+            $0.width.height.equalTo(Metric.profileSize)
+            $0.centerX.equalToSafeArea(self.view)
+        }
+        
+        self.profileButton.snp.makeConstraints {
+            $0.top.equalTo(self.profileImage.snp.bottom).offset(10)
+            $0.centerX.equalToSafeArea(self.view)
+        }
+        
+        self.nicknameTextField.snp.makeConstraints {
+            $0.top.equalTo(self.profileButton.snp.bottom).offset(Metric.nicknameTextFieldTop)
+            $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
+            $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
+            $0.height.equalToSuperview().dividedBy(Metric.textFieldHeightRatio)
         }
     }
     
