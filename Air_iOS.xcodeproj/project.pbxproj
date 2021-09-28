@@ -138,8 +138,8 @@
 		621D3DB72702D875003FEA9F /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				621D3DB82702D89A003FEA9F /* RegisterViewReactor.swift */,
 				621D3DBA2702D8F7003FEA9F /* RegisterViewController.swift */,
+				621D3DB82702D89A003FEA9F /* RegisterViewReactor.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
