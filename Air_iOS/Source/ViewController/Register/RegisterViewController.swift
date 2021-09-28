@@ -32,6 +32,9 @@ final class RegisterViewController: BaseViewController, View {
         
         // View
         static let viewSide = 30.f
+        
+        // Login
+        static let loginButtonHeight = 40.f
     }
     
     fileprivate struct Font {
@@ -75,6 +78,11 @@ final class RegisterViewController: BaseViewController, View {
         $0.placeholder.text = "닉네임을 입력해주세요"
     }
     
+    let loginButton = AirPlainButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+    }
+    
     // MARK: - Inintializing
     init(reactor: Reactor) {
         super.init()
@@ -100,6 +108,7 @@ final class RegisterViewController: BaseViewController, View {
         self.view.addSubview(self.profileImage)
         self.view.addSubview(self.profileButton)
         self.view.addSubview(self.nicknameTextField)
+        self.view.addSubview(self.loginButton)
     }
     
     override func setupConstraints() {
@@ -134,6 +143,14 @@ final class RegisterViewController: BaseViewController, View {
             $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
             $0.height.equalToSuperview().dividedBy(Metric.textFieldHeightRatio)
         }
+        
+        self.loginButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(Metric.viewSide)
+            $0.trailing.equalToSuperview().offset(-Metric.viewSide)
+            $0.height.equalTo(Metric.loginButtonHeight)
+            $0.bottom.equalToSafeArea(self.view).offset(-30)
+        }
+
     }
     
     // MARK: - Configuring

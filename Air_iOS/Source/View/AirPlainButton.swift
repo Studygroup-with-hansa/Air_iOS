@@ -47,8 +47,8 @@ final class AirPlainButton: UIButton {
     
     override public var isHighlighted: Bool {
         didSet {
-            UIView.animate(withDuration: 0.3) {
-                self.backgroundColor = self.backgroundColor?.withAlphaComponent(self.isHighlighted ? 0.7 : 1)
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = self.isHighlighted ? 0.6 : 1
             }
         }
     }
