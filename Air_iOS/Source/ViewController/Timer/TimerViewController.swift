@@ -128,7 +128,15 @@ final class TimerViewController: BaseViewController, View {
     
     // MARK: - Configuring
     func bind(reactor: TimerViewReactor) {
+        Observable<Int>.interval(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
+            .map { Reactor.Action.increaseTime($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
+        reactor.state.map { $0.time }
+            .distinctUntilChanged()
+            .bind(to: self.timeLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }
 
