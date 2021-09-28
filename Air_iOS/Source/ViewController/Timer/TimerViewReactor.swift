@@ -17,15 +17,15 @@ final class TimerViewReactor: Reactor, Stepper {
     let initialState: State
     
     enum Action {
-        
+        case increaseTime(Int)
     }
     
     enum Mutation {
-        
+        case updateTime(Int)
     }
     
     struct State {
-        
+        var time: String = ""
     }
     
     init() {
@@ -33,10 +33,20 @@ final class TimerViewReactor: Reactor, Stepper {
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
-        
+        switch action {
+        case let .increaseTime(seconds):
+            return Observable.just(Mutation.updateTime(seconds))
+        }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
+        var state = state
         
+        switch mutation {
+        case let .updateTime(seconds):
+            state.time = "\(seconds)"
+        }
+        
+        return state
     }
 }
