@@ -55,8 +55,9 @@ final class RegisterViewController: BaseViewController, View {
         $0.tintColor = .white
     }
     
-    let profileImage = UIImageView().then {
-        $0.image = R.image.profile()
+    let profileImage = UIButton(type: .system).then {
+        $0.setBackgroundImage(R.image.profile(), for: .normal)
+        $0.backgroundColor = R.color.profileBackgroundColor()
         $0.layer.cornerRadius = Metric.profileSize / 2
         $0.layer.masksToBounds = true
         $0.layer.borderWidth = Style.profileBorderWidth

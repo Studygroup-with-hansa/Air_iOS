@@ -105,7 +105,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 7 colors.
+  /// This `R.color` struct is generated, and contains static references to 8 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
@@ -113,6 +113,8 @@ struct R: Rswift.Validatable {
     static let buttonBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ButtonBorderColor")
     /// Color `MainColor`.
     static let mainColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "MainColor")
+    /// Color `ProfileBackgroundColor`.
+    static let profileBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ProfileBackgroundColor")
     /// Color `ProfileBorderColor`.
     static let profileBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ProfileBorderColor")
     /// Color `TextFieldBorderColor`.
@@ -146,6 +148,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func mainColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.mainColor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ProfileBackgroundColor", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func profileBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.profileBackgroundColor, compatibleWith: traitCollection)
     }
     #endif
 
@@ -206,6 +217,14 @@ struct R: Rswift.Validatable {
     @available(watchOSApplicationExtension 4.0, *)
     static func mainColor(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.mainColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "ProfileBackgroundColor", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func profileBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.profileBackgroundColor.name)
     }
     #endif
 
