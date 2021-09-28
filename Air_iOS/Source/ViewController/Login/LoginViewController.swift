@@ -28,11 +28,12 @@ final class LoginViewController: BaseViewController, View {
         
         // Email
         static let emailTextFieldTop = 50.f
-        static let emailTextFieldHeight = 60.f
         
         // Code
         static let codeTextFieldTop = 10.f
-        static let codeTextFieldHeight = 60.f
+        
+        // Text Field
+        static let textFieldHeightRatio = 12.f
         
         // Login
         static let loginButtonHeight = 40.f
@@ -118,13 +119,13 @@ final class LoginViewController: BaseViewController, View {
             $0.top.equalTo(self.backgroundView.snp.bottom).offset(Metric.emailTextFieldTop)
             $0.left.equalToSuperview().offset(Metric.viewSide)
             $0.right.equalTo(self.sendCodeButton.snp.left).offset(-15)
-            $0.height.equalTo(Metric.emailTextFieldHeight)
+            $0.height.equalToSuperview().dividedBy(Metric.textFieldHeightRatio)
         }
         
         self.sendCodeButton.snp.makeConstraints {
             $0.bottom.equalTo(emailTextField)
             $0.right.equalToSuperview().offset(-Metric.viewSide)
-            $0.height.equalTo(Metric.emailTextFieldHeight - 20)
+            $0.height.equalToSuperview().dividedBy(Metric.textFieldHeightRatio).offset(-20)
             $0.width.equalTo(55)
         }
         
@@ -132,7 +133,7 @@ final class LoginViewController: BaseViewController, View {
             $0.top.equalTo(self.emailTextField.snp.bottom).offset(Metric.codeTextFieldTop)
             $0.left.equalToSuperview().offset(Metric.viewSide)
             $0.right.equalToSuperview().offset(-Metric.viewSide)
-            $0.height.equalTo(Metric.codeTextFieldHeight)
+            $0.height.equalToSuperview().dividedBy(Metric.textFieldHeightRatio)
         }
         
         self.loginButton.snp.makeConstraints {
