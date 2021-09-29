@@ -105,12 +105,14 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 8 colors.
+  /// This `R.color` struct is generated, and contains static references to 9 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
     /// Color `ButtonBorderColor`.
     static let buttonBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ButtonBorderColor")
+    /// Color `GraphSeparatorColor`.
+    static let graphSeparatorColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "GraphSeparatorColor")
     /// Color `MainColor`.
     static let mainColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "MainColor")
     /// Color `ProfileBackgroundColor`.
@@ -139,6 +141,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func buttonBorderColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.buttonBorderColor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "GraphSeparatorColor", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func graphSeparatorColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.graphSeparatorColor, compatibleWith: traitCollection)
     }
     #endif
 
@@ -209,6 +220,14 @@ struct R: Rswift.Validatable {
     @available(watchOSApplicationExtension 4.0, *)
     static func buttonBorderColor(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.buttonBorderColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "GraphSeparatorColor", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func graphSeparatorColor(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.graphSeparatorColor.name)
     }
     #endif
 

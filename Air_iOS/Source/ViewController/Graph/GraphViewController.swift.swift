@@ -16,7 +16,10 @@ final class GraphViewController: BaseViewController, View {
     
     // MARK: - Constants
     fileprivate struct Metric {
+        static let selectDaysHeightRatio = 8.5.f
         static let graphSizeRatio = 4.5.f
+        static let viewSide = 20.f
+        static let separatorHeight = 1.f
     }
     
     fileprivate struct Font {
@@ -26,6 +29,14 @@ final class GraphViewController: BaseViewController, View {
     // MARK: - Properties
     
     // MARK: - UI
+    let selectDays = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    let separatorView = UIView().then {
+        $0.backgroundColor = R.color.graphSeparatorColor()
+    }
+    
     let graphView = GraphPieChart()
     
     let marker = ChartMarker()
@@ -46,6 +57,9 @@ final class GraphViewController: BaseViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.barTintColor = R.color.mainColor()
+        self.title = "2021.09.02"
+        
         let subjects = ["국어 : 1H 2M 00S", "수학 : 1H 2M 00S", "영어 : 1H 2M 00S", "기타 : 1H 2M 00S"]
         let times = [1, 1, 1, 1]
         let colors: [UIColor] = [.cyan, .green, .brown, .magenta]
@@ -57,6 +71,8 @@ final class GraphViewController: BaseViewController, View {
         super.setupLayout()
         
         self.view.addSubview(self.graphView)
+        self.view.addSubview(self.selectDays)
+        self.view.addSubview(self.separatorView)
     }
     
     override func setupConstraints() {
@@ -65,7 +81,21 @@ final class GraphViewController: BaseViewController, View {
         self.graphView.snp.makeConstraints {
             $0.height.equalToSuperview().dividedBy(Metric.graphSizeRatio)
             $0.width.equalTo(self.graphView.snp.height)
-            $0.center.equalToSuperview()
+            $0.center.equalToSafeArea(self.view)
+        }
+        
+        self.selectDays.snp.makeConstraints {
+            $0.top.equalToSafeArea(self.view)
+            $0.height.equalToSuperview().dividedBy(Metric.selectDaysHeightRatio)
+            $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
+            $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
+        }
+        
+        self.separatorView.snp.makeConstraints {
+            $0.top.equalTo(self.selectDays.snp.bottom)
+            $0.height.equalTo(Metric.separatorHeight)
+            $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
+            $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
         }
     }
     
