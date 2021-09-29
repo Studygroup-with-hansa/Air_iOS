@@ -53,6 +53,8 @@ final class GraphViewController: BaseViewController, View {
     
     let marker = ChartMarker()
     
+    let scrollView = UIScrollView()
+    
     // MARK: - Inintializing
     init(reactor: Reactor) {
         super.init()
@@ -82,11 +84,12 @@ final class GraphViewController: BaseViewController, View {
     override func setupLayout() {
         super.setupLayout()
         
-        self.view.addSubview(self.graphView)
         self.view.addSubview(self.selectDays)
         self.view.addSubview(self.separatorView)
         self.view.addSubview(self.barView)
         self.barView.addSubview(self.barLabel)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.graphView)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -99,12 +102,6 @@ final class GraphViewController: BaseViewController, View {
     
     override func setupConstraints() {
         super.setupConstraints()
-        
-        self.graphView.snp.makeConstraints {
-            $0.height.equalToSuperview().dividedBy(Metric.graphSizeRatio)
-            $0.width.equalTo(self.graphView.snp.height)
-            $0.center.equalToSafeArea(self.view)
-        }
         
         self.selectDays.snp.makeConstraints {
             $0.top.equalToSafeArea(self.view)
@@ -129,6 +126,20 @@ final class GraphViewController: BaseViewController, View {
         self.barLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        self.scrollView.snp.makeConstraints {
+            $0.top.equalTo(self.barView.snp.bottom)
+            $0.left.right.bottom.equalToSafeArea(self.view)
+        }
+        
+        self.graphView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(1500)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(self.view).dividedBy(Metric.graphSizeRatio)
+            $0.width.equalTo(self.graphView.snp.height)
+            $0.bottom.equalToSuperview().offset(-1500)
+        }
+        
     }
     
     // MARK: - Configuring
