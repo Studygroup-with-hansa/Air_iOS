@@ -19,13 +19,17 @@ final class GraphViewController: BaseViewController, View {
     fileprivate struct Metric {
         static let selectDaysHeightRatio = 8.5.f
         static let graphSizeRatio = 4.5.f
+        static let graphTop = 40.f
         static let viewSide = 20.f
         static let separatorHeight = 1.f
         static let barChartViewHeightRatio = 20.f
+        static let describeLabelTop = 40.f
+        static let timeLabelTop = 10.f
     }
     
     fileprivate struct Font {
-        
+        static let describeLabelFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let timeLabelFont = UIFont.systemFont(ofSize: 26, weight: .bold)
     }
     
     // MARK: - Properties
@@ -55,6 +59,18 @@ final class GraphViewController: BaseViewController, View {
     let marker = ChartMarker()
     
     let scrollView = UIScrollView()
+    
+    let describeLabel = UILabel().then {
+        $0.textColor = R.color.mainColor()
+        $0.font = Font.describeLabelFont
+        $0.text = "총 공부 시간"
+    }
+    
+    let timeLabel = UILabel().then {
+        $0.textColor = R.color.mainColor()
+        $0.font = Font.timeLabelFont
+        $0.text = "05H 32M 03S"
+    }
     
     // MARK: - Inintializing
     init(reactor: Reactor) {
@@ -90,15 +106,9 @@ final class GraphViewController: BaseViewController, View {
         self.view.addSubview(self.barView)
         self.barView.addSubview(self.barLabel)
         self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.describeLabel)
+        self.scrollView.addSubview(self.timeLabel)
         self.scrollView.addSubview(self.graphView)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        if !self.graphView.highlighted.isEmpty {
-            self.graphView.highlightValue(nil)
-        }
     }
     
     override func setupConstraints() {
@@ -133,8 +143,18 @@ final class GraphViewController: BaseViewController, View {
             $0.left.right.bottom.equalToSafeArea(self.view)
         }
         
+        self.describeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(Metric.describeLabelTop)
+        }
+        
+        self.timeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(self.describeLabel.snp.bottom).offset(Metric.timeLabelTop)
+        }
+        
         self.graphView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(1500)
+            $0.top.equalTo(self.timeLabel.snp.bottom).offset(Metric.graphTop)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(self.view).dividedBy(Metric.graphSizeRatio)
             $0.width.equalTo(self.graphView.snp.height)
