@@ -8,6 +8,7 @@
 import UIKit
 
 import Charts
+import RxGesture
 import ReactorKit
 
 final class GraphViewController: BaseViewController, View {
@@ -144,7 +145,15 @@ final class GraphViewController: BaseViewController, View {
     
     // MARK: - Configuring
     func bind(reactor: GraphViewReactor) {
-        
+        self.scrollView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if !self.graphView.highlighted.isEmpty {
+                    self.graphView.highlightValue(nil)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
