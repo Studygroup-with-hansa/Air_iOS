@@ -10,11 +10,11 @@ import SwiftUI
 
 struct ViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        let reactor = LoginViewReactor()
-        LoginViewController(reactor: reactor).showPreview(.iPhone13Pro)
-        LoginViewController(reactor: reactor).showPreview(.iPodTouch)
+//        let reactor = LoginViewReactor()
+//        LoginViewController(reactor: reactor).showPreview(.iPhone13Pro)
+//        LoginViewController(reactor: reactor).showPreview(.iPodTouch)
 //
-//        AirTextField().showPreview(width: 375, height: 60)
+        GraphChartView().showPreview(width: 400, height: 400)
     }
 }
 
