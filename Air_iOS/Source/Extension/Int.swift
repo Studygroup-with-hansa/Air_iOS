@@ -13,6 +13,6 @@ extension Int {
         let minutes = self / 60
         let hour = self / 3600
                 
-        return String(hour).toTwoDigits + "H " + String(minutes).toTwoDigits + "M " + String(seconds).toTwoDigits + "S"
+        return String(hour).toTwoDigits + "H " + String(minutes - 60 * hour).toTwoDigits + "M " + String(seconds).toTwoDigits + "S"
     }
 }

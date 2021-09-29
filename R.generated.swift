@@ -263,12 +263,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 2 images.
+  /// This `R.image` struct is generated, and contains static references to 3 images.
   struct image {
     /// Image `Air_logo`.
     static let air_logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "Air_logo")
     /// Image `Profile`.
     static let profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "Profile")
+    /// Image `StopTimer`.
+    static let stopTimer = Rswift.ImageResource(bundle: R.hostingBundle, name: "StopTimer")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "Air_logo", bundle: ..., traitCollection: ...)`
@@ -281,6 +283,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "Profile", bundle: ..., traitCollection: ...)`
     static func profile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.profile, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "StopTimer", bundle: ..., traitCollection: ...)`
+    static func stopTimer(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.stopTimer, compatibleWith: traitCollection)
     }
     #endif
 
