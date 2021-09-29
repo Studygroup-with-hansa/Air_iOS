@@ -89,6 +89,14 @@ final class GraphViewController: BaseViewController, View {
         self.barView.addSubview(self.barLabel)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        if !self.graphView.highlighted.isEmpty {
+            self.graphView.highlightValue(nil)
+        }
+    }
+    
     override func setupConstraints() {
         super.setupConstraints()
         
