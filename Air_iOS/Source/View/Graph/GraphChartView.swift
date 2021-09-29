@@ -24,6 +24,7 @@ final class GraphChartView: UIView {
         $0.legend.enabled = false
         $0.rotationEnabled = false
         $0.transparentCircleColor = .clear
+        $0.holeColor = .systemBackground
         $0.usePercentValuesEnabled = false
         $0.drawEntryLabelsEnabled = false
     }
@@ -34,12 +35,12 @@ final class GraphChartView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        let players = ["국어 : 1H 2M 00S", "수학 : 1H 2M 00S", "영어 : 1H 2M 00S", "기타 : 1H 2M 00S"]
-        let goals = [6, 8, 26, 30]
-        customizeChart(dataPoints: players, values: goals.map { Double($0) })
+        let subjects = ["국어 : 1H 2M 00S", "수학 : 1H 2M 00S", "영어 : 1H 2M 00S", "기타 : 1H 2M 00S"]
+        let times = [1, 1, 1, 1]
+        let colors: [UIColor] = [.cyan, .green, .brown, .magenta]
         
-        marker.chartView = chart
-        chart.marker = marker
+        customizeChart(dataPoints: subjects, values: times.map { Double($0) }, colors: colors)
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -57,19 +58,19 @@ final class GraphChartView: UIView {
         }
     }
     
-    func customizeChart(dataPoints: [String], values: [Double]) {
+    func customizeChart(dataPoints: [String], values: [Double], colors: [UIColor]) {
         
         // 1. Set ChartDataEntry
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
-            let dataEntry = PieChartDataEntry(value: values[i], label: dataPoints[i], data: dataPoints[i] as AnyObject)
+            let dataEntry = PieChartDataEntry(value: values[i], label: dataPoints[i])
             dataEntries.append(dataEntry)
         }
         
         // 2. Set ChartDataSet
         let pieChartDataSet = PieChartDataSet(entries: dataEntries, label: nil)
         pieChartDataSet.sliceSpace = CGFloat(2)
-        pieChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
+        pieChartDataSet.colors = colors
         pieChartDataSet.drawValuesEnabled = false
         
         // 3. Set ChartData
@@ -78,20 +79,13 @@ final class GraphChartView: UIView {
         format.numberStyle = .none
         let formatter = DefaultValueFormatter(formatter: format)
         pieChartData.setValueFormatter(formatter)
+        
         // 4. Assign it to the chart’s data
-        chart.data = pieChartData
-    }
-    
-    private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
-      var colors: [UIColor] = []
-      for _ in 0..<numbersOfColor {
-        let red = Double(arc4random_uniform(256))
-        let green = Double(arc4random_uniform(256))
-        let blue = Double(arc4random_uniform(256))
-        let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-        colors.append(color)
-      }
-      return colors
+        self.chart.data = pieChartData
+        
+        // 5. Add marker to chart
+        self.marker.chartView = self.chart
+        self.chart.marker = self.marker
     }
     
 }
