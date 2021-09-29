@@ -20,6 +20,7 @@ final class GraphViewController: BaseViewController, View {
         static let graphSizeRatio = 4.5.f
         static let viewSide = 20.f
         static let separatorHeight = 1.f
+        static let barChartViewHeightRatio = 20.f
     }
     
     fileprivate struct Font {
@@ -35,6 +36,17 @@ final class GraphViewController: BaseViewController, View {
     
     let separatorView = UIView().then {
         $0.backgroundColor = R.color.graphSeparatorColor()
+    }
+    
+    let barView = UIView().then {
+        $0.backgroundColor = R.color.mainColor()
+    }
+    
+    let barLabel = UILabel().then {
+        $0.text = "목표 달성률 50% | 05H 00M 00S"
+        $0.textAlignment = .center
+        $0.textColor = .systemBackground
+        $0.adjustsFontSizeToFitWidth = true
     }
     
     let graphView = GraphPieChart()
@@ -73,6 +85,8 @@ final class GraphViewController: BaseViewController, View {
         self.view.addSubview(self.graphView)
         self.view.addSubview(self.selectDays)
         self.view.addSubview(self.separatorView)
+        self.view.addSubview(self.barView)
+        self.barView.addSubview(self.barLabel)
     }
     
     override func setupConstraints() {
@@ -96,6 +110,16 @@ final class GraphViewController: BaseViewController, View {
             $0.height.equalTo(Metric.separatorHeight)
             $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
+        }
+        
+        self.barView.snp.makeConstraints {
+            $0.top.equalTo(self.separatorView.snp.bottom)
+            $0.left.right.equalTo(self.separatorView)
+            $0.height.equalToSuperview().dividedBy(Metric.barChartViewHeightRatio)
+        }
+        
+        self.barLabel.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
