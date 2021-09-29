@@ -2,6 +2,9 @@ PODS:
   - Alamofire (5.4.3)
   - Carte (2.2.1)
   - CGFloatLiteral (0.5.0)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - Differentiator (5.0.0)
   - KeychainAccess (4.2.2)
   - Moya/Core (15.0.0):
@@ -54,6 +57,7 @@ PODS:
 DEPENDENCIES:
   - Carte
   - CGFloatLiteral
+  - Charts
   - KeychainAccess
   - Moya/RxSwift
   - R.swift
@@ -75,6 +79,7 @@ SPEC REPOS:
     - Alamofire
     - Carte
     - CGFloatLiteral
+    - Charts
     - Differentiator
     - KeychainAccess
     - Moya
@@ -99,6 +104,7 @@ SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Carte: 6bcff4eaa894ff5b979d646de833fec96e04a38c
   CGFloatLiteral: 0328648f666e3cb2263d5ee3972df9d320786d25
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -119,6 +125,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 814b369d6528761de69626b7182643e941fc58fc
+PODFILE CHECKSUM: 7ba5d7000c35eec1bc1a2c3d8b54a1a54c252c9b
 
 COCOAPODS: 1.10.1
