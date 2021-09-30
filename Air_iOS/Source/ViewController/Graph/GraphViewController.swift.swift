@@ -8,6 +8,7 @@
 import UIKit
 
 import Charts
+import RxDataSources
 import RxGesture
 import ReactorKit
 
@@ -19,7 +20,7 @@ final class GraphViewController: BaseViewController, View {
     fileprivate struct Metric {
         static let selectDaysHeightRatio = 8.5.f
         static let graphSizeRatio = 4.5.f
-        static let graphTop = 40.f
+        static let graphTop = 30.f
         static let viewSide = 20.f
         static let separatorHeight = 1.f
         static let barChartViewHeightRatio = 20.f
@@ -58,8 +59,6 @@ final class GraphViewController: BaseViewController, View {
     
     let marker = ChartMarker()
     
-    let scrollView = UIScrollView()
-    
     let describeLabel = UILabel().then {
         $0.textColor = R.color.mainColor()
         $0.font = Font.describeLabelFont
@@ -92,7 +91,7 @@ final class GraphViewController: BaseViewController, View {
         self.title = "2021.09.02"
         
         let subjects = ["국어 : 1H 2M 00S", "수학 : 1H 2M 00S", "영어 : 1H 2M 00S", "기타 : 1H 2M 00S"]
-        let times = [1, 1, 1, 1]
+        let times = [360, 4500, 201, 2000]
         let colors: [UIColor] = [.cyan, .green, .brown, .magenta]
         
         customizeChart(dataPoints: subjects, values: times.map { Double($0) }, colors: colors)
@@ -105,10 +104,9 @@ final class GraphViewController: BaseViewController, View {
         self.view.addSubview(self.separatorView)
         self.view.addSubview(self.barView)
         self.barView.addSubview(self.barLabel)
-        self.view.addSubview(self.scrollView)
-        self.scrollView.addSubview(self.describeLabel)
-        self.scrollView.addSubview(self.timeLabel)
-        self.scrollView.addSubview(self.graphView)
+        self.view.addSubview(self.describeLabel)
+        self.view.addSubview(self.timeLabel)
+        self.view.addSubview(self.graphView)
     }
     
     override func setupConstraints() {
@@ -138,14 +136,9 @@ final class GraphViewController: BaseViewController, View {
             $0.edges.equalToSuperview()
         }
         
-        self.scrollView.snp.makeConstraints {
-            $0.top.equalTo(self.barView.snp.bottom)
-            $0.left.right.bottom.equalToSafeArea(self.view)
-        }
-        
         self.describeLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(Metric.describeLabelTop)
+            $0.top.equalTo(self.barView.snp.bottom).offset(Metric.describeLabelTop)
         }
         
         self.timeLabel.snp.makeConstraints {
@@ -158,14 +151,13 @@ final class GraphViewController: BaseViewController, View {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(self.view).dividedBy(Metric.graphSizeRatio)
             $0.width.equalTo(self.graphView.snp.height)
-            $0.bottom.equalToSuperview().offset(-1500)
         }
         
     }
     
     // MARK: - Configuring
     func bind(reactor: GraphViewReactor) {
-        self.scrollView.rx.tapGesture()
+        self.view.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
@@ -189,7 +181,7 @@ extension GraphViewController {
         
         // 2. Set ChartDataSet
         let pieChartDataSet = PieChartDataSet(entries: dataEntries, label: nil)
-        pieChartDataSet.sliceSpace = CGFloat(2)
+        pieChartDataSet.sliceSpace = CGFloat(1)
         pieChartDataSet.colors = colors
         pieChartDataSet.drawValuesEnabled = false
         

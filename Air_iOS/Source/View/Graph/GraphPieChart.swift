@@ -20,6 +20,7 @@ final class GraphPieChart: PieChartView {
         self.drawEntryLabelsEnabled = false
         self.transparentCircleRadiusPercent = 0
         self.holeRadiusPercent = 0.5
+        self.usePercentValuesEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
