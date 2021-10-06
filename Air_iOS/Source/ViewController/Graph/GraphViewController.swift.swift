@@ -87,7 +87,6 @@ final class GraphViewController: BaseViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = R.color.mainColor()
         self.title = "2021.09.02"
         
         let subjects = ["국어 : 1H 2M 00S", "수학 : 1H 2M 00S", "영어 : 1H 2M 00S", "기타 : 1H 2M 00S"]
@@ -157,6 +156,7 @@ final class GraphViewController: BaseViewController, View {
     
     // MARK: - Configuring
     func bind(reactor: GraphViewReactor) {
+        
         self.view.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -166,6 +166,7 @@ final class GraphViewController: BaseViewController, View {
                 }
             })
             .disposed(by: disposeBag)
+        
     }
 }
 

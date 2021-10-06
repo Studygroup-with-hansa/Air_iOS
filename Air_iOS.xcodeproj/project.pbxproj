@@ -42,7 +42,7 @@
 		62AB75732703E63D0090169D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AB75722703E63D0090169D /* String.swift */; };
 		62B42F512704383F00D2060A /* GraphViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B42F502704383F00D2060A /* GraphViewReactor.swift */; };
 		62B42F532704387000D2060A /* GraphViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B42F522704387000D2060A /* GraphViewController.swift.swift */; };
-		62B42F58270467E500D2060A /* ChartMarker.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B42F57270467E500D2060A /* ChartMarker.swift.swift */; };
+		62B42F58270467E500D2060A /* ChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B42F57270467E500D2060A /* ChartMarker.swift */; };
 		62B42F5A2704953300D2060A /* GraphPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B42F592704953300D2060A /* GraphPieChart.swift */; };
 		62EE3752270171E000ABFCD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE3751270171E000ABFCD2 /* BaseViewController.swift */; };
 		BFE942F5FC48C5191A355A21 /* Pods_Air_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */; };
@@ -113,7 +113,7 @@
 		62AB75722703E63D0090169D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		62B42F502704383F00D2060A /* GraphViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewReactor.swift; sourceTree = "<group>"; };
 		62B42F522704387000D2060A /* GraphViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift.swift; sourceTree = "<group>"; };
-		62B42F57270467E500D2060A /* ChartMarker.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMarker.swift.swift; sourceTree = "<group>"; };
+		62B42F57270467E500D2060A /* ChartMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMarker.swift; sourceTree = "<group>"; };
 		62B42F592704953300D2060A /* GraphPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPieChart.swift; sourceTree = "<group>"; };
 		62EE3751270171E000ABFCD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -382,7 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				62B42F592704953300D2060A /* GraphPieChart.swift */,
-				62B42F57270467E500D2060A /* ChartMarker.swift.swift */,
+				62B42F57270467E500D2060A /* ChartMarker.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -681,7 +681,7 @@
 				6229F26E26F1B84500B51EBA /* AppServices.swift in Sources */,
 				621D3DBE2702DAA0003FEA9F /* R.generated.swift in Sources */,
 				62A9A41227021C0B001E2343 /* Snapkit.swift in Sources */,
-				62B42F58270467E500D2060A /* ChartMarker.swift.swift in Sources */,
+				62B42F58270467E500D2060A /* ChartMarker.swift in Sources */,
 				62B42F512704383F00D2060A /* GraphViewReactor.swift in Sources */,
 				621D3DBB2702D8F7003FEA9F /* RegisterViewController.swift in Sources */,
 				6229F28426F320E300B51EBA /* ModelType.swift in Sources */,
