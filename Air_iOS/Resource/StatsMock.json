@@ -11,12 +11,12 @@
                 "subject": [
                     {
                         "title": "수학",
-                        "time": 3,
+                        "time": 99080,
                         "color": "#ffffff"
                     },
                     {
                         "title": "국어",
-                        "time": 10,
+                        "time": 1233,
                         "color": "#000000"
                     }
                 ],

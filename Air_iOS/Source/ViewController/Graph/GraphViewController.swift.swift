@@ -9,10 +9,11 @@ import UIKit
 
 import Charts
 import RxDataSources
+import ReusableKit
 import RxGesture
 import ReactorKit
 
-final class GraphViewController: BaseViewController, View {
+final class GraphViewController: BaseViewController, ReactorKit.View {
     
     typealias Reactor = GraphViewReactor
     
@@ -33,7 +34,12 @@ final class GraphViewController: BaseViewController, View {
         static let timeLabelFont = UIFont.systemFont(ofSize: 26, weight: .bold)
     }
     
+    fileprivate struct Reusable {
+        static let legendCell = ReusableCell<GraphViewLegendCell>()
+    }
+    
     // MARK: - Properties
+    fileprivate let dataSource: RxTableViewSectionedReloadDataSource<GraphLegendSection>
     
     // MARK: - UI
     let selectDays = UIView().then {
@@ -69,12 +75,30 @@ final class GraphViewController: BaseViewController, View {
         $0.font = Font.timeLabelFont
     }
     
+    let tableView = UITableView(frame: .zero, style: .plain).then {
+        $0.separatorStyle = .none
+        $0.allowsSelection = false
+        $0.register(Reusable.legendCell)
+    }
+    
     // MARK: - Inintializing
     init(reactor: Reactor) {
+        self.dataSource = Self.dataSourceFactory()
         super.init()
         defer {
             self.reactor = reactor
         }
+    }
+    
+    private static func dataSourceFactory() -> RxTableViewSectionedReloadDataSource<GraphLegendSection> {
+        return .init(configureCell: { dataSource, tableView, indexPath, sectionItem in
+            switch sectionItem {
+            case let .legend(reactor):
+                let cell = tableView.dequeue(Reusable.legendCell, for: indexPath)
+                cell.reactor = reactor
+                return cell
+            }
+        })
     }
     
     required init?(coder: NSCoder) {
@@ -99,6 +123,7 @@ final class GraphViewController: BaseViewController, View {
         self.view.addSubview(self.describeLabel)
         self.view.addSubview(self.timeLabel)
         self.view.addSubview(self.graphView)
+        self.view.addSubview(self.tableView)
     }
     
     override func setupConstraints() {
@@ -145,6 +170,14 @@ final class GraphViewController: BaseViewController, View {
             $0.width.equalTo(self.graphView.snp.height)
         }
         
+        self.tableView.snp.makeConstraints {
+            $0.top.equalTo(self.graphView.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.left.equalToSafeArea(self.view).offset(100)
+            $0.right.equalToSafeArea(self.view).offset(-100)
+            $0.bottom.equalToSafeArea(self.view).offset(52)
+        }
+        
     }
     
     // MARK: - Configuring
@@ -165,6 +198,8 @@ final class GraphViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        
+        // Output
         reactor.state.map { $0.totalTime.toTimeString }.asObservable()
             .distinctUntilChanged()
             .bind(to: self.timeLabel.rx.text)
@@ -182,8 +217,33 @@ final class GraphViewController: BaseViewController, View {
             .bind(to: self.barLabel.rx.text)
             .disposed(by: disposeBag)
         
+        reactor.state.map { $0.sections }
+            .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
+            .disposed(by: disposeBag)
         
+        // View
+        self.tableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        self.tableView.rx.itemSelected
+            .subscribe(onNext: { [weak tableView] indexPath in
+                tableView?.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
+}
+
+extension GraphViewController: UIScrollViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionItem = self.dataSource[indexPath]
+        
+        switch sectionItem {
+        case .legend:
+            return 35
+        }
+    }
+    
 }
 
 extension GraphViewController {
