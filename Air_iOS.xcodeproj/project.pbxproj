@@ -25,6 +25,9 @@
 		6229F28426F320E300B51EBA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28326F320E300B51EBA /* ModelType.swift */; };
 		6229F28626F3216600B51EBA /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28526F3216600B51EBA /* Token.swift */; };
 		6229F28826F3229B00B51EBA /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28726F3229B00B51EBA /* Email.swift */; };
+		62452448270D7AB700DE083D /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62452447270D7AB700DE083D /* Stats.swift */; };
+		6245244A270D7DB500DE083D /* StatsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 62452449270D7DB500DE083D /* StatsMock.json */; };
+		6245244E270DBEC000DE083D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6245244D270DBEC000DE083D /* Double.swift */; };
 		627E9BB42703606D00A2C5A1 /* TimerViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB32703606D00A2C5A1 /* TimerViewReactor.swift */; };
 		627E9BB6270360DD00A2C5A1 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB5270360DD00A2C5A1 /* TimerViewController.swift */; };
 		627E9BB827036B6B00A2C5A1 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB727036B6B00A2C5A1 /* Int.swift */; };
@@ -96,6 +99,9 @@
 		6229F28326F320E300B51EBA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		6229F28526F3216600B51EBA /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		6229F28726F3229B00B51EBA /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		62452447270D7AB700DE083D /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		62452449270D7DB500DE083D /* StatsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StatsMock.json; sourceTree = "<group>"; };
+		6245244D270DBEC000DE083D /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		627E9BB32703606D00A2C5A1 /* TimerViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewReactor.swift; sourceTree = "<group>"; };
 		627E9BB5270360DD00A2C5A1 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		627E9BB727036B6B00A2C5A1 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 				6229F24026F1713D00B51EBA /* Assets.xcassets */,
 				62A9A4062701A8F4001E2343 /* Colors.xcassets */,
 				6229F24226F1713D00B51EBA /* LaunchScreen.storyboard */,
+				62452449270D7DB500DE083D /* StatsMock.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -280,6 +287,7 @@
 			children = (
 				62A9A41027021BDE001E2343 /* SnapKit */,
 				6229F27326F1D2CF00B51EBA /* DateFormatter.swift */,
+				6245244D270DBEC000DE083D /* Double.swift */,
 				627E9BB727036B6B00A2C5A1 /* Int.swift */,
 				62AB75722703E63D0090169D /* String.swift */,
 			);
@@ -310,6 +318,7 @@
 				6229F28326F320E300B51EBA /* ModelType.swift */,
 				6229F28526F3216600B51EBA /* Token.swift */,
 				6229F28726F3229B00B51EBA /* Email.swift */,
+				62452447270D7AB700DE083D /* Stats.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -530,6 +539,7 @@
 				62A9A4072701A8F4001E2343 /* Colors.xcassets in Resources */,
 				6229F24426F1713D00B51EBA /* LaunchScreen.storyboard in Resources */,
 				6229F24126F1713D00B51EBA /* Assets.xcassets in Resources */,
+				6245244A270D7DB500DE083D /* StatsMock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +688,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62A9A40527019729001E2343 /* LoginViewController.swift in Sources */,
+				62452448270D7AB700DE083D /* Stats.swift in Sources */,
 				6229F26E26F1B84500B51EBA /* AppServices.swift in Sources */,
 				621D3DBE2702DAA0003FEA9F /* R.generated.swift in Sources */,
 				62A9A41227021C0B001E2343 /* Snapkit.swift in Sources */,
@@ -689,6 +700,7 @@
 				62B42F5A2704953300D2060A /* GraphPieChart.swift in Sources */,
 				62A9A3FA2701930A001E2343 /* DeviceType.swift in Sources */,
 				6229F28826F3229B00B51EBA /* Email.swift in Sources */,
+				6245244E270DBEC000DE083D /* Double.swift in Sources */,
 				62A9A40B2701DA0B001E2343 /* AirTextField.swift in Sources */,
 				6229F27A26F210CD00B51EBA /* MainAPI.swift in Sources */,
 				6229F27F26F310D500B51EBA /* AuthService.swift in Sources */,

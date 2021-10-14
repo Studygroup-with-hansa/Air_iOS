@@ -49,7 +49,6 @@ final class GraphViewController: BaseViewController, View {
     }
     
     let barLabel = UILabel().then {
-        $0.text = "목표 달성률 50% | 05H 00M 00S"
         $0.textAlignment = .center
         $0.textColor = .systemBackground
         $0.adjustsFontSizeToFitWidth = true
@@ -68,7 +67,6 @@ final class GraphViewController: BaseViewController, View {
     let timeLabel = UILabel().then {
         $0.textColor = R.color.mainColor()
         $0.font = Font.timeLabelFont
-        $0.text = "05H 32M 03S"
     }
     
     // MARK: - Inintializing
@@ -89,11 +87,6 @@ final class GraphViewController: BaseViewController, View {
         
         self.title = "2021.09.02"
         
-        let subjects = ["국어 : 1H 2M 00S", "수학 : 1H 2M 00S", "영어 : 1H 2M 00S", "기타 : 1H 2M 00S"]
-        let times = [360, 4500, 201, 2000]
-        let colors: [UIColor] = [.cyan, .green, .brown, .magenta]
-        
-        customizeChart(dataPoints: subjects, values: times.map { Double($0) }, colors: colors)
     }
     
     override func setupLayout() {
@@ -167,17 +160,44 @@ final class GraphViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
         
+        self.rx.viewDidAppear.asObservable()
+            .map { _ in Reactor.Action.refreshData }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.totalTime.toTimeString }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.timeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.stat?.subject }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                self?.customizeChart(subject: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { "목표 달성률 " + $0.percent + "% | " + $0.goal.toTimeString }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.barLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        
     }
 }
 
 extension GraphViewController {
-    fileprivate func customizeChart(dataPoints: [String], values: [Double], colors: [UIColor]) {
+    fileprivate func customizeChart(subject: [Subject]?) {
+        
+        guard let subject = subject else { return }
         
         // 1. Set ChartDataEntry
         var dataEntries: [ChartDataEntry] = []
-        for i in 0..<dataPoints.count {
-            let dataEntry = PieChartDataEntry(value: values[i], label: dataPoints[i])
+        var colors: [UIColor] = []
+        for i in 0..<subject.count {
+            let dataEntry = PieChartDataEntry(value: Double(subject[i].time), label: subject[i].title)
             dataEntries.append(dataEntry)
+            colors.append(subject[i].color.hexString)
         }
         
         // 2. Set ChartDataSet
