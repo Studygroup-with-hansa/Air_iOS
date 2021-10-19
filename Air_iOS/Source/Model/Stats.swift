@@ -22,7 +22,7 @@ struct StatsDataClass: ModelType, Equatable {
 
 // MARK: - Stat
 struct Stat: ModelType, Equatable {
-    let date: String
+    let date: Date
     let totalStudyTime: Int
     let subject: [Subject]
     let goal: Int

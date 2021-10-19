@@ -20,24 +20,32 @@ final class GraphViewReactor: Reactor, Stepper {
     
     enum Action {
         case refreshData
+        case selectDay(Int)
     }
     
     enum Mutation {
-        case updateData(StatsDataClass?)
+        case updateData(StatsDataClass?, Int?)
     }
     
     struct State {
         var currentIndex = 0
+        var dataClass: StatsDataClass?
         var stat: Stat?
         var totalTime: Int = 0
         var goal: Int = 0
         var percent: String = ""
-//        var today: Date
         
         var legendSectionItems: [GraphLegendSectionItem] = []
-        var sections: [GraphLegendSection] {
+        var dateSectionItems: [GraphDateSectionItem] = []
+        var legendSections: [GraphLegendSection] {
             let section: [GraphLegendSection] = [
                 .legend(self.legendSectionItems)
+            ]
+            return section
+        }
+        var dateSections: [GraphDateSection] {
+            let section: [GraphDateSection] = [
+                .date(self.dateSectionItems)
             ]
             return section
         }
@@ -52,9 +60,11 @@ final class GraphViewReactor: Reactor, Stepper {
         case .refreshData:
             guard let path = Bundle.main.path(forResource: "StatsMock", ofType: "json") else { return Observable.empty() }
             guard let jsonString = try? String(contentsOfFile: path) else { return Observable.empty() }
-            print(jsonString)
-            let stats = try? JSONDecoder().decode(Stats.self, from: jsonString.data(using: .utf8)!)
-            return Observable.just(Mutation.updateData(stats?.data))
+            let stats = try? Stats.decoder.decode(Stats.self, from: jsonString.data(using: .utf8)!)
+            return Observable.just(Mutation.updateData(stats?.data, currentState.currentIndex))
+            
+        case let .selectDay(idx):
+            return Observable.just(Mutation.updateData(currentState.dataClass, idx))
         }
     }
     
@@ -63,11 +73,14 @@ final class GraphViewReactor: Reactor, Stepper {
         
         switch mutation {
             
-        case let .updateData(dataClass):
+        case let .updateData(dataClass, idx):
             guard let dataClass = dataClass else { return state }
+            guard let idx = idx else { return state }
             
             // Graph
-            let stat = dataClass.stats[currentState.currentIndex]
+            let stat = dataClass.stats[idx]
+            state.currentIndex = idx
+            state.dataClass = dataClass
             state.stat = stat
             state.totalTime = stat.totalStudyTime
             state.goal = stat.goal
@@ -78,6 +91,12 @@ final class GraphViewReactor: Reactor, Stepper {
             stat.subject.forEach {
                 state.legendSectionItems.append(.legend(GraphViewLegendReactor(model: $0)))
             }
+            
+            state.dateSectionItems.removeAll()
+            dataClass.stats.forEach {
+                state.dateSectionItems.append(.date(GraphViewDateReactor(model: $0)))
+            }
+            
         }
         
         return state

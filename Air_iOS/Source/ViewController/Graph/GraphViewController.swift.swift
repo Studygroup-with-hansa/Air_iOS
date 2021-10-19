@@ -36,14 +36,17 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     
     fileprivate struct Reusable {
         static let legendCell = ReusableCell<GraphViewLegendCell>()
+        static let dateCell = ReusableCell<GraphViewDateCell>()
     }
     
     // MARK: - Properties
-    fileprivate let dataSource: RxTableViewSectionedReloadDataSource<GraphLegendSection>
+    fileprivate let legendDataSource: RxTableViewSectionedReloadDataSource<GraphLegendSection>
+    fileprivate let dateDataSource: RxCollectionViewSectionedReloadDataSource<GraphDateSection>
     
     // MARK: - UI
-    let selectDays = UIView().then {
-        $0.backgroundColor = .white
+    let selectCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.init()).then {
+        $0.isScrollEnabled = false
+        $0.register(Reusable.dateCell)
     }
     
     let separatorView = UIView().then {
@@ -83,18 +86,30 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     
     // MARK: - Inintializing
     init(reactor: Reactor) {
-        self.dataSource = Self.dataSourceFactory()
+        self.legendDataSource = Self.legendDataSourceFactory()
+        self.dateDataSource = Self.dateDataSourceFactory()
         super.init()
         defer {
             self.reactor = reactor
         }
     }
     
-    private static func dataSourceFactory() -> RxTableViewSectionedReloadDataSource<GraphLegendSection> {
+    private static func legendDataSourceFactory() -> RxTableViewSectionedReloadDataSource<GraphLegendSection> {
         return .init(configureCell: { dataSource, tableView, indexPath, sectionItem in
             switch sectionItem {
             case let .legend(reactor):
                 let cell = tableView.dequeue(Reusable.legendCell, for: indexPath)
+                cell.reactor = reactor
+                return cell
+            }
+        })
+    }
+    
+    private static func dateDataSourceFactory() -> RxCollectionViewSectionedReloadDataSource<GraphDateSection> {
+        return .init(configureCell: { dataSource, collectionView, indexPath, sectionItem in
+            switch sectionItem {
+            case let .date(reactor):
+                let cell = collectionView.dequeue(Reusable.dateCell, for: indexPath)
                 cell.reactor = reactor
                 return cell
             }
@@ -116,7 +131,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     override func setupLayout() {
         super.setupLayout()
         
-        self.view.addSubview(self.selectDays)
+        self.view.addSubview(self.selectCollectionView)
         self.view.addSubview(self.separatorView)
         self.view.addSubview(self.barView)
         self.barView.addSubview(self.barLabel)
@@ -129,7 +144,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     override func setupConstraints() {
         super.setupConstraints()
         
-        self.selectDays.snp.makeConstraints {
+        self.selectCollectionView.snp.makeConstraints {
             $0.top.equalToSafeArea(self.view)
             $0.height.equalToSuperview().dividedBy(Metric.selectDaysHeightRatio)
             $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
@@ -137,7 +152,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
         }
         
         self.separatorView.snp.makeConstraints {
-            $0.top.equalTo(self.selectDays.snp.bottom)
+            $0.top.equalTo(self.selectCollectionView.snp.bottom)
             $0.height.equalTo(Metric.separatorHeight)
             $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
@@ -183,6 +198,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     // MARK: - Configuring
     func bind(reactor: GraphViewReactor) {
         
+        // input
         self.view.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -217,12 +233,19 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
             .bind(to: self.barLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reactor.state.map { $0.sections }
-            .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
+        reactor.state.map { $0.legendSections }.asObservable()
+            .bind(to: self.tableView.rx.items(dataSource: self.legendDataSource))
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.dateSections }.asObservable()
+            .bind(to: self.selectCollectionView.rx.items(dataSource: self.dateDataSource))
             .disposed(by: disposeBag)
         
         // View
         self.tableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        self.selectCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
         self.tableView.rx.itemSelected
@@ -236,14 +259,13 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
 extension GraphViewController: UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let sectionItem = self.dataSource[indexPath]
+        let sectionItem = self.legendDataSource[indexPath]
         
         switch sectionItem {
         case .legend:
             return 35
         }
     }
-    
 }
 
 extension GraphViewController {

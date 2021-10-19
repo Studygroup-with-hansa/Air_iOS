@@ -1,8 +1,8 @@
 //
-//  GraphViewLegendReactor.swift
+//  GraphViewDateReactor.swift
 //  Air_iOS
 //
-//  Created by 김부성 on 2021/10/14.
+//  Created by 김부성 on 2021/10/17.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 import ReactorKit
 import RxRelay
 
-final class GraphViewLegendReactor: Reactor {
+final class GraphViewDateReactor: Reactor {
     
     let initialState: State
     
@@ -21,12 +21,13 @@ final class GraphViewLegendReactor: Reactor {
     }
     
     struct State {
-        var color: UIColor
-        var title: String
+        var date: Date
+        var total: Int
+        var goal: Int
     }
     
-    init(model: Subject) {
-        self.initialState = State(color: model.color.hexString, title: model.title + " : " + model.time.toTimeString)
+    init(model: Stat) {
+        self.initialState = State(date: model.date, total: model.totalStudyTime, goal: model.goal )
         
     }
     
@@ -38,5 +39,3 @@ final class GraphViewLegendReactor: Reactor {
         
     }
 }
-
-
