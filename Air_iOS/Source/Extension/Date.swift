@@ -12,6 +12,7 @@ public extension Date {
     var toWeekDay: String {
         let formatter = DateFormatter().then {
             $0.dateFormat = "EEEEE"
+            $0.locale = Locale.init(identifier: "ko-KR")
         }
         return formatter.string(from: self)
     }

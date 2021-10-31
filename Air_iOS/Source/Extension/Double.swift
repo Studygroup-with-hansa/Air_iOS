@@ -9,6 +9,6 @@ import Foundation
 
 extension Double {
     var toPercentage: String {
-        return String(format: "%.1f", self * 100)
+        return String(format: "%.1f", self)
     }
 }

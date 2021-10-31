@@ -14,8 +14,6 @@ import RxFlow
 final class GraphViewReactor: Reactor, Stepper {
     var steps = PublishRelay<Step>()
     
-    
-    
     let initialState: State
     
     enum Action {
@@ -28,7 +26,7 @@ final class GraphViewReactor: Reactor, Stepper {
     }
     
     struct State {
-        var currentIndex = 0
+        var currentIndex = 6
         var dataClass: StatsDataClass?
         var stat: Stat?
         var totalTime: Int = 0
@@ -36,23 +34,20 @@ final class GraphViewReactor: Reactor, Stepper {
         var percent: String = ""
         
         var legendSectionItems: [GraphLegendSectionItem] = []
-        var dateSectionItems: [GraphDateSectionItem] = []
         var legendSections: [GraphLegendSection] {
             let section: [GraphLegendSection] = [
                 .legend(self.legendSectionItems)
             ]
             return section
         }
-        var dateSections: [GraphDateSection] {
-            let section: [GraphDateSection] = [
-                .date(self.dateSectionItems)
-            ]
-            return section
-        }
     }
     
-    init() {
+    let userService: UserServiceType
+    
+    init(userService: UserServiceType) {
         self.initialState = State()
+        
+        self.userService = userService
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -68,37 +63,45 @@ final class GraphViewReactor: Reactor, Stepper {
         }
     }
     
+    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+        let eventMutation = userService.event.flatMap { [weak self] event -> Observable<Mutation> in
+            guard let self = self else { return Observable.empty() }
+            
+            switch event {
+            case let .selectDays(index):
+                return Observable.just(Mutation.updateData(self.currentState.dataClass, index))
+            }
+        }
+        
+        return Observable.merge(mutation, eventMutation)
+    }
+    
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         
         switch mutation {
-            
         case let .updateData(dataClass, idx):
             guard let dataClass = dataClass else { return state }
             guard let idx = idx else { return state }
             
             // Graph
             let stat = dataClass.stats[idx]
+            dump(stat)
             state.currentIndex = idx
             state.dataClass = dataClass
             state.stat = stat
             state.totalTime = stat.totalStudyTime
             state.goal = stat.goal
-            state.percent = (Double(state.goal) / Double(state.totalTime)).toPercentage
+            state.percent = stat.achievementRate.toPercentage
             
             // Legend
             state.legendSectionItems.removeAll()
+            
             stat.subject.forEach {
                 state.legendSectionItems.append(.legend(GraphViewLegendReactor(model: $0)))
             }
-            
-            state.dateSectionItems.removeAll()
-            dataClass.stats.forEach {
-                state.dateSectionItems.append(.date(GraphViewDateReactor(model: $0)))
-            }
-            
-        }
         
         return state
+        }
     }
 }

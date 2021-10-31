@@ -1,5 +1,5 @@
 //
-//  GraphViewDateCell.swift
+//  DatePickerDateCell.swift
 //  Air_iOS
 //
 //  Created by 김부성 on 2021/10/17.
@@ -7,11 +7,13 @@
 
 import UIKit
 
+import RxGesture
 import ReactorKit
 
-final class GraphViewDateCell: BaseCollectionViewCell, View {
+final class DatePickerDateCell: UIView, ReactorKit.View {
     
-    typealias Reactor = GraphViewDateReactor
+    // MARK: - Properties
+    var disposeBag = DisposeBag()
     
     // MARK: Constants
     fileprivate struct Metric {
@@ -49,6 +51,10 @@ final class GraphViewDateCell: BaseCollectionViewCell, View {
         super.init(frame: frame)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -74,7 +80,15 @@ final class GraphViewDateCell: BaseCollectionViewCell, View {
 
     // MARK: - Configuring
     
-    func bind(reactor: GraphViewDateReactor) {
+    func bind(reactor: DatePickerDateReactor) {
+        
+        self.rx.tapGesture()
+            .when(.recognized)
+            // defualt index is 6
+            .map { _ in Reactor.Action.changeIndex(self.reactor?.currentState.index ?? 6) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         reactor.state.map { $0.date.toWeekDay }.asObservable()
             .distinctUntilChanged()
             .bind(to: self.weekLabel.rx.text)

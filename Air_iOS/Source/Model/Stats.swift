@@ -17,6 +17,7 @@ struct Stats: ModelType, Equatable {
 // MARK: - DataClass
 struct StatsDataClass: ModelType, Equatable {
     let totalTime, goals: Int
+    let achievementRate: Double
     let stats: [Stat]
 }
 
@@ -24,6 +25,7 @@ struct StatsDataClass: ModelType, Equatable {
 struct Stat: ModelType, Equatable {
     let date: Date
     let totalStudyTime: Int
+    let achievementRate: Double
     let subject: [Subject]
     let goal: Int
 }

@@ -36,18 +36,13 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     
     fileprivate struct Reusable {
         static let legendCell = ReusableCell<GraphViewLegendCell>()
-        static let dateCell = ReusableCell<GraphViewDateCell>()
     }
     
     // MARK: - Properties
     fileprivate let legendDataSource: RxTableViewSectionedReloadDataSource<GraphLegendSection>
-    fileprivate let dateDataSource: RxCollectionViewSectionedReloadDataSource<GraphDateSection>
     
     // MARK: - UI
-    let selectCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.init()).then {
-        $0.isScrollEnabled = false
-        $0.register(Reusable.dateCell)
-    }
+    let datePickerView = AirDatePickerView()
     
     let separatorView = UIView().then {
         $0.backgroundColor = R.color.graphSeparatorColor()
@@ -87,7 +82,6 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     // MARK: - Inintializing
     init(reactor: Reactor) {
         self.legendDataSource = Self.legendDataSourceFactory()
-        self.dateDataSource = Self.dateDataSourceFactory()
         super.init()
         defer {
             self.reactor = reactor
@@ -99,17 +93,6 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
             switch sectionItem {
             case let .legend(reactor):
                 let cell = tableView.dequeue(Reusable.legendCell, for: indexPath)
-                cell.reactor = reactor
-                return cell
-            }
-        })
-    }
-    
-    private static func dateDataSourceFactory() -> RxCollectionViewSectionedReloadDataSource<GraphDateSection> {
-        return .init(configureCell: { dataSource, collectionView, indexPath, sectionItem in
-            switch sectionItem {
-            case let .date(reactor):
-                let cell = collectionView.dequeue(Reusable.dateCell, for: indexPath)
                 cell.reactor = reactor
                 return cell
             }
@@ -131,7 +114,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     override func setupLayout() {
         super.setupLayout()
         
-        self.view.addSubview(self.selectCollectionView)
+        self.view.addSubview(self.datePickerView)
         self.view.addSubview(self.separatorView)
         self.view.addSubview(self.barView)
         self.barView.addSubview(self.barLabel)
@@ -144,7 +127,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     override func setupConstraints() {
         super.setupConstraints()
         
-        self.selectCollectionView.snp.makeConstraints {
+        self.datePickerView.snp.makeConstraints {
             $0.top.equalToSafeArea(self.view)
             $0.height.equalToSuperview().dividedBy(Metric.selectDaysHeightRatio)
             $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
@@ -152,7 +135,7 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
         }
         
         self.separatorView.snp.makeConstraints {
-            $0.top.equalTo(self.selectCollectionView.snp.bottom)
+            $0.top.equalTo(self.datePickerView.snp.bottom)
             $0.height.equalTo(Metric.separatorHeight)
             $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
@@ -214,7 +197,6 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
         // Output
         reactor.state.map { $0.totalTime.toTimeString }.asObservable()
             .distinctUntilChanged()
@@ -237,15 +219,19 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
             .bind(to: self.tableView.rx.items(dataSource: self.legendDataSource))
             .disposed(by: disposeBag)
         
-        reactor.state.map { $0.dateSections }.asObservable()
-            .bind(to: self.selectCollectionView.rx.items(dataSource: self.dateDataSource))
+        reactor.state.map { $0.dataClass }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                self?.datePickerView.reactor = AirDatePickerReactor(models: $0?.stats ?? [], userService: reactor.userService)
+            })
             .disposed(by: disposeBag)
+        
+//        reactor.state.map { $0.currentIndex }.asObservable()
+//            .distinctUntilChanged()
+//            .subscribe(onNext: [weak self])
         
         // View
         self.tableView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-        
-        self.selectCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
         self.tableView.rx.itemSelected
