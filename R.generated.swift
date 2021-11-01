@@ -304,7 +304,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 3 images.
+  /// This `R.image` struct is generated, and contains static references to 6 images.
   struct image {
     /// Image `Air_logo`.
     static let air_logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "Air_logo")
@@ -312,6 +312,12 @@ struct R: Rswift.Validatable {
     static let profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "Profile")
     /// Image `StopTimer`.
     static let stopTimer = Rswift.ImageResource(bundle: R.hostingBundle, name: "StopTimer")
+    /// Image `drop_down`.
+    static let drop_down = Rswift.ImageResource(bundle: R.hostingBundle, name: "drop_down")
+    /// Image `play_icon`.
+    static let play_icon = Rswift.ImageResource(bundle: R.hostingBundle, name: "play_icon")
+    /// Image `plus_button_icon`.
+    static let plus_button_icon = Rswift.ImageResource(bundle: R.hostingBundle, name: "plus_button_icon")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "Air_logo", bundle: ..., traitCollection: ...)`
@@ -331,6 +337,27 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "StopTimer", bundle: ..., traitCollection: ...)`
     static func stopTimer(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.stopTimer, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "drop_down", bundle: ..., traitCollection: ...)`
+    static func drop_down(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.drop_down, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "play_icon", bundle: ..., traitCollection: ...)`
+    static func play_icon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.play_icon, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "plus_button_icon", bundle: ..., traitCollection: ...)`
+    static func plus_button_icon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.plus_button_icon, compatibleWith: traitCollection)
     }
     #endif
 

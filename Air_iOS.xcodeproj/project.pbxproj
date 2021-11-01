@@ -38,6 +38,7 @@
 		62537220271BB77C00165834 /* DatePickerDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6253721F271BB77C00165834 /* DatePickerDateCell.swift */; };
 		62537222271BB7C200165834 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62537221271BB7C200165834 /* BaseCollectionViewCell.swift */; };
 		62537224271BD29200165834 /* DatePickerDateReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62537223271BD29200165834 /* DatePickerDateReactor.swift */; };
+		6263E6B1272FFB7300B4BECA /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6263E6B0272FFB7300B4BECA /* MainViewCell.swift */; };
 		627E9BB42703606D00A2C5A1 /* TimerViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB32703606D00A2C5A1 /* TimerViewReactor.swift */; };
 		627E9BB6270360DD00A2C5A1 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB5270360DD00A2C5A1 /* TimerViewController.swift */; };
 		627E9BB827036B6B00A2C5A1 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB727036B6B00A2C5A1 /* Int.swift */; };
@@ -127,6 +128,7 @@
 		6253721F271BB77C00165834 /* DatePickerDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDateCell.swift; sourceTree = "<group>"; };
 		62537221271BB7C200165834 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		62537223271BD29200165834 /* DatePickerDateReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDateReactor.swift; sourceTree = "<group>"; };
+		6263E6B0272FFB7300B4BECA /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
 		627E9BB32703606D00A2C5A1 /* TimerViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewReactor.swift; sourceTree = "<group>"; };
 		627E9BB5270360DD00A2C5A1 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		627E9BB727036B6B00A2C5A1 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -412,6 +414,14 @@
 			path = GraphDate;
 			sourceTree = "<group>";
 		};
+		6263E6AF272FFB3600B4BECA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6263E6B0272FFB7300B4BECA /* MainViewCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		627E9BB22703604800A2C5A1 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +500,7 @@
 		62C0872127181070009D34A7 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				6263E6AF272FFB3600B4BECA /* Main */,
 				6253721D271AFE7700165834 /* GraphLegend */,
 			);
 			path = TableView;
@@ -832,6 +843,7 @@
 				62A9A40F270216D9001E2343 /* AirPlainButton.swift in Sources */,
 				62A9A40027019457001E2343 /* Preview.swift in Sources */,
 				627E9BB42703606D00A2C5A1 /* TimerViewReactor.swift in Sources */,
+				6263E6B1272FFB7300B4BECA /* MainViewCell.swift in Sources */,
 				62537224271BD29200165834 /* DatePickerDateReactor.swift in Sources */,
 				6229F27C26F2E6E200B51EBA /* AuthAPI.swift in Sources */,
 				624A4AC3272FC91B006C8F5E /* Subject.swift in Sources */,

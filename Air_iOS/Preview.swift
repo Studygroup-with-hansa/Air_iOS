@@ -8,14 +8,13 @@
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-//struct ViewControllerPreview: PreviewProvider {
-//    static var previews: some View {
+struct ViewControllerPreview: PreviewProvider {
+    static var previews: some View {
 //        let reactor = LoginViewReactor()
 //        LoginViewController(reactor: reactor).showPreview(.iPhone13Pro)
-//        LoginViewController(reactor: reactor).showPreview(.iPodTouch)
-//
-//        GraphViewDateCell().showPreview(width: 50, height: 61)
-//    }
-//}
+//        LoginViewContr/oller(reactor: reactor).showPreview(.iPodTouch)
+        MainViewCell().showPreview(width: 300, height: 60)
+    }
+}
 
 #endif
