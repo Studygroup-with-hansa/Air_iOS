@@ -99,8 +99,8 @@ final class GraphViewReactor: Reactor, Stepper {
             stat.subject.forEach {
                 state.legendSectionItems.append(.legend(GraphViewLegendReactor(model: $0)))
             }
+        }
         
         return state
-        }
     }
 }
