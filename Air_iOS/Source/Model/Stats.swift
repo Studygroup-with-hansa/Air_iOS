@@ -29,10 +29,3 @@ struct Stat: ModelType, Equatable {
     let subject: [Subject]
     let goal: Int
 }
-
-// MARK: - Subject
-struct Subject: ModelType, Equatable {
-    let title: String
-    let time: Int
-    let color: String
-}
