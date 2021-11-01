@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - Email
-struct Email: Codable {
+struct Email: ModelType {
     let status: Int
     let detail: String
     let data: EmailDataClass
 }
 
 // MARK: - DataClass
-struct EmailDataClass: Codable {
+struct EmailDataClass: ModelType {
     let isEmailExist, emailSent: Bool
 }

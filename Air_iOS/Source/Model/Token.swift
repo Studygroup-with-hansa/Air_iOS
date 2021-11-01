@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - Token
-struct Token: Codable {
+struct Token: ModelType {
     let status: Int
     let detail: String
     let data: TokenDataClass
 }
 
 // MARK: - DataClass
-struct TokenDataClass: Codable {
+struct TokenDataClass: ModelType {
     let token: String
 }

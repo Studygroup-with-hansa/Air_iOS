@@ -10,4 +10,22 @@ import Then
 
 protocol ModelType: Codable, Then {
     
+    static var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy { get }
+    
+    static var decoder: JSONDecoder { get }
+}
+
+extension ModelType {
+    static var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy {
+        let formatter = DateFormatter().then {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        return .formatted(formatter)
+    }
+    
+    static var decoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = self.dateDecodingStrategy
+        return decoder
+    }
 }

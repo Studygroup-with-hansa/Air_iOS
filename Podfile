@@ -7,7 +7,8 @@ target 'Air_iOS' do
 
   # UI
   pod 'SnapKit'
-  
+  pod 'Charts'
+
   # Architecture
   pod 'ReactorKit'
 
@@ -33,6 +34,8 @@ target 'Air_iOS' do
   pod 'Then'
   pod 'Carte'
   pod 'CGFloatLiteral'
+  pod 'ReusableKit/RxSwift'
+
   # Pods for Air_iOS
 
   target 'Air_iOSTests' do
