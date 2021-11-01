@@ -19,11 +19,13 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     
     // MARK: - Constants
     fileprivate struct Metric {
-        static let selectDaysHeightRatio = 8.5.f
+        static let selectDaysHeightRatio = 10.f
         static let graphSizeRatio = 4.5.f
         static let graphTop = 30.f
         static let viewSide = 20.f
+        static let separatorTop = 15.f
         static let separatorHeight = 1.f
+        static let barViewTop = 10.f
         static let barChartViewHeightRatio = 20.f
         static let describeLabelTop = 40.f
         static let timeLabelTop = 10.f
@@ -135,14 +137,14 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
         }
         
         self.separatorView.snp.makeConstraints {
-            $0.top.equalTo(self.datePickerView.snp.bottom)
+            $0.top.equalTo(self.datePickerView.snp.bottom).offset(Metric.separatorTop)
             $0.height.equalTo(Metric.separatorHeight)
             $0.left.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.right.equalToSafeArea(self.view).offset(-Metric.viewSide)
         }
         
         self.barView.snp.makeConstraints {
-            $0.top.equalTo(self.separatorView.snp.bottom)
+            $0.top.equalTo(self.separatorView.snp.bottom).offset(Metric.barViewTop)
             $0.left.right.equalTo(self.separatorView)
             $0.height.equalToSuperview().dividedBy(Metric.barChartViewHeightRatio)
         }
@@ -210,9 +212,17 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        reactor.state.map { "목표 달성률 " + $0.percent + "% | " + $0.goal.toTimeString }.asObservable()
+        reactor.state.map { "목표 달성률 " + $0.percent.toPercentage + "% | " + $0.goal.toTimeString }.asObservable()
             .distinctUntilChanged()
             .bind(to: self.barLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { 0.3 + $0.percent / 1000 * 7 }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.barView.backgroundColor = self.barView.backgroundColor?.withAlphaComponent($0)
+            })
             .disposed(by: disposeBag)
         
         reactor.state.map { $0.legendSections }.asObservable()
@@ -225,10 +235,6 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
                 self?.datePickerView.reactor = AirDatePickerReactor(models: $0?.stats ?? [], userService: reactor.userService)
             })
             .disposed(by: disposeBag)
-        
-//        reactor.state.map { $0.currentIndex }.asObservable()
-//            .distinctUntilChanged()
-//            .subscribe(onNext: [weak self])
         
         // View
         self.tableView.rx.setDelegate(self)

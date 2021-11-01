@@ -64,11 +64,11 @@ final class DatePickerDateCell: UIView, ReactorKit.View {
         
         self.colorView.snp.makeConstraints {
             $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(self.colorView.snp.width)
         }
         
         self.weekLabel.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(self.snp.height).dividedBy(Metric.colorViewRatio)
             $0.bottom.equalTo(self.colorView.snp.top)
         }
         
@@ -97,6 +97,20 @@ final class DatePickerDateCell: UIView, ReactorKit.View {
         reactor.state.map { $0.date.toDay }.asObservable()
             .distinctUntilChanged()
             .bind(to: self.dateLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.achievementRate }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                if $0 == 0 {
+                    self.colorView.backgroundColor = self.colorView.backgroundColor?.withAlphaComponent(0)
+                    self.dateLabel.textColor = .black
+                } else {
+                    self.colorView.backgroundColor = self.colorView.backgroundColor?.withAlphaComponent(0.3 + $0 / 1000 * 7)
+                    self.dateLabel.textColor = .white
+                }
+            })
             .disposed(by: disposeBag)
     }
 }

@@ -31,7 +31,7 @@ final class GraphViewReactor: Reactor, Stepper {
         var stat: Stat?
         var totalTime: Int = 0
         var goal: Int = 0
-        var percent: String = ""
+        var percent: Double = 0
         
         var legendSectionItems: [GraphLegendSectionItem] = []
         var legendSections: [GraphLegendSection] {
@@ -86,13 +86,12 @@ final class GraphViewReactor: Reactor, Stepper {
             
             // Graph
             let stat = dataClass.stats[idx]
-            dump(stat)
             state.currentIndex = idx
             state.dataClass = dataClass
             state.stat = stat
             state.totalTime = stat.totalStudyTime
             state.goal = stat.goal
-            state.percent = stat.achievementRate.toPercentage
+            state.percent = stat.achievementRate
             
             // Legend
             state.legendSectionItems.removeAll()
