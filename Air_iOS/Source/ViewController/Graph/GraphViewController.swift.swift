@@ -109,8 +109,6 @@ final class GraphViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "2021.09.02"
-        
     }
     
     override func setupLayout() {

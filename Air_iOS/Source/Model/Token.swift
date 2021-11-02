@@ -9,9 +9,9 @@ import Foundation
 
 // MARK: - Token
 struct Token: ModelType {
-    let status: Int
+    let status: Int?
     let detail: String
-    let data: TokenDataClass
+    let data: TokenDataClass?
 }
 
 // MARK: - DataClass

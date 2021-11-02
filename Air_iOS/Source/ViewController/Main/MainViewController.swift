@@ -8,6 +8,8 @@
 import UIKit
 
 import ReactorKit
+import RxDataSources
+import ReusableKit
 import RxViewController
 
 final class MainViewController: BaseViewController, View {
@@ -33,7 +35,12 @@ final class MainViewController: BaseViewController, View {
         
     }
     
+    fileprivate struct Reusable {
+        static let mainCell = ReusableCell<MainViewCell>()
+    }
+    
     // MARK: - Properties
+    fileprivate let dataSource: RxTableViewSectionedReloadDataSource<MainSection>
     
     // MARK: - UI
     let colorView = UIView().then {
@@ -67,10 +74,13 @@ final class MainViewController: BaseViewController, View {
     
     let tableView = UITableView().then {
         $0.separatorStyle = .none
+        $0.allowsSelection = false
+        $0.register(Reusable.mainCell)
     }
     
     // MARK: - Inintializing
     init(reactor: Reactor) {
+        self.dataSource = Self.dataSourceFactory()
         super.init()
         defer {
             self.reactor = reactor
@@ -79,6 +89,17 @@ final class MainViewController: BaseViewController, View {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private static func dataSourceFactory() -> RxTableViewSectionedReloadDataSource<MainSection> {
+        return .init(configureCell: { dataSource, tableView, indexPath, sectionItem in
+            switch sectionItem {
+            case let .mainCell(reactor):
+                let cell = tableView.dequeue(Reusable.mainCell, for: indexPath)
+                cell.reactor = reactor
+                return cell
+            }
+        })
     }
     
     // MARK: - View Life Cycle
@@ -145,6 +166,10 @@ final class MainViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        reactor.state.map { $0.sections }
+            .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
+            .disposed(by: disposeBag)
+        
         reactor.state.map { $0.totalTime.toTimeString }.asObservable()
             .bind(to: self.timeLabel.rx.text)
             .disposed(by: disposeBag)
@@ -153,6 +178,12 @@ final class MainViewController: BaseViewController, View {
             .bind(to: self.goalLabel.rx.text)
             .disposed(by: disposeBag)
         
+        // View
+        self.tableView.rx.itemSelected
+            .subscribe(onNext: { [weak tableView] indexPath in
+                tableView?.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

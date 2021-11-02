@@ -26,6 +26,14 @@ final class MainViewReactor: Reactor {
         var totalTime: Int = 0
         var goal: Int = 0
         var subject: [Subject] = []
+        
+        var sectionItems: [MainSectionItem] = []
+        var sections: [MainSection] {
+            let section: [MainSection] = [
+                .mainCell(self.sectionItems)
+            ]
+            return section
+        }
     }
     
     init() {
@@ -52,6 +60,14 @@ final class MainViewReactor: Reactor {
             state.totalTime = dataClass.totalTime
             state.goal = dataClass.goal
             state.subject = dataClass.subject
+            
+            state.sectionItems.removeAll()
+            
+            dataClass.subject.forEach {
+                let percent: Double = Double($0.time % dataClass.totalTime)
+                state.sectionItems.append(.mainCell(MainViewCellReactor(model: $0, percent: percent)))
+            }
+
         }
         
         return state
