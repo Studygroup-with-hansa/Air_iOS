@@ -11,7 +11,7 @@ import ReactorKit
 
 final class MainViewCell: BaseTableViewCell, View {
     
-    typealias Reactor = GraphViewLegendReactor
+    typealias Reactor = MainViewCellReactor
     
     // MARK: Constants
     fileprivate struct Metric {
@@ -28,7 +28,7 @@ final class MainViewCell: BaseTableViewCell, View {
         static let pecentRight = 20.f
         
         // DropDown
-        static let buttonLeft = 6.f
+        static let buttonLeft = 26.f
         static let buttonWidth = 2.f
         static let buttonHeight = 8.f
     }
@@ -52,18 +52,15 @@ final class MainViewCell: BaseTableViewCell, View {
     let titleLabel = UILabel().then {
         $0.font = Font.titleFont
         $0.adjustsFontSizeToFitWidth = true
-        $0.text = "국어"
     }
     
     let timeLabel = UILabel().then {
         $0.font = Font.timeFont
         $0.adjustsFontSizeToFitWidth = true
-        $0.text = 300.toDigitString
     }
     
     let percentLabel = UILabel().then {
         $0.font = Font.percentFont
-        $0.text = 30.toPercentage + "%"
     }
     
     let dropDownButton = UIButton(type: .system).then {
@@ -124,8 +121,26 @@ final class MainViewCell: BaseTableViewCell, View {
 
     // MARK: - Configuring
     
-    func bind(reactor: GraphViewLegendReactor) {
+    func bind(reactor: MainViewCellReactor) {
+        reactor.state.map { $0.title }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.titleLabel.rx.text)
+            .disposed(by: disposeBag)
         
+        reactor.state.map { $0.color.hexString }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.colorView.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.time.toDigitString }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.timeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.percent.toPercentage }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.percentLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }
 

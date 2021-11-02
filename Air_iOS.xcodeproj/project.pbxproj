@@ -39,6 +39,8 @@
 		62537222271BB7C200165834 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62537221271BB7C200165834 /* BaseCollectionViewCell.swift */; };
 		62537224271BD29200165834 /* DatePickerDateReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62537223271BD29200165834 /* DatePickerDateReactor.swift */; };
 		6263E6B1272FFB7300B4BECA /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6263E6B0272FFB7300B4BECA /* MainViewCell.swift */; };
+		6263E6B32730B9D100B4BECA /* MainViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6263E6B22730B9D100B4BECA /* MainViewCellReactor.swift */; };
+		626AC5A72730C7F900E907E8 /* MainSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5A62730C7F900E907E8 /* MainSection.swift */; };
 		627E9BB42703606D00A2C5A1 /* TimerViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB32703606D00A2C5A1 /* TimerViewReactor.swift */; };
 		627E9BB6270360DD00A2C5A1 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB5270360DD00A2C5A1 /* TimerViewController.swift */; };
 		627E9BB827036B6B00A2C5A1 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E9BB727036B6B00A2C5A1 /* Int.swift */; };
@@ -129,6 +131,8 @@
 		62537221271BB7C200165834 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		62537223271BD29200165834 /* DatePickerDateReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDateReactor.swift; sourceTree = "<group>"; };
 		6263E6B0272FFB7300B4BECA /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		6263E6B22730B9D100B4BECA /* MainViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCellReactor.swift; sourceTree = "<group>"; };
+		626AC5A62730C7F900E907E8 /* MainSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSection.swift; sourceTree = "<group>"; };
 		627E9BB32703606D00A2C5A1 /* TimerViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewReactor.swift; sourceTree = "<group>"; };
 		627E9BB5270360DD00A2C5A1 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		627E9BB727036B6B00A2C5A1 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -418,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				6263E6B0272FFB7300B4BECA /* MainViewCell.swift */,
+				6263E6B22730B9D100B4BECA /* MainViewCellReactor.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				62C0872927181C56009D34A7 /* GraphLegendSection.swift.swift */,
+				626AC5A62730C7F900E907E8 /* MainSection.swift */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -838,6 +844,7 @@
 				624A4ABC272FC603006C8F5E /* MainViewReactor.swift in Sources */,
 				62A9A3FC2701940D001E2343 /* UIViewPreview.swift.swift in Sources */,
 				62C08725271810D6009D34A7 /* BaseTableViewCell.swift in Sources */,
+				626AC5A72730C7F900E907E8 /* MainSection.swift in Sources */,
 				62AB75732703E63D0090169D /* String.swift in Sources */,
 				624A4AB9272EADE4006C8F5E /* UserService.swift in Sources */,
 				62A9A40F270216D9001E2343 /* AirPlainButton.swift in Sources */,
@@ -856,6 +863,7 @@
 				62A9A40D270208D8001E2343 /* SendCodeButton.swift in Sources */,
 				6229F27826F20FC100B51EBA /* BaseAPI.swift in Sources */,
 				627E9BB827036B6B00A2C5A1 /* Int.swift in Sources */,
+				6263E6B32730B9D100B4BECA /* MainViewCellReactor.swift in Sources */,
 				6229F23826F1713A00B51EBA /* AppDelegate.swift in Sources */,
 				6229F27426F1D2CF00B51EBA /* DateFormatter.swift in Sources */,
 			);
