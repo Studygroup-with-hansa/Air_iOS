@@ -11,7 +11,7 @@ protocol BaseAPI: TargetType {}
 
 extension BaseAPI {
     
-    var baseURL: URL { URL(string: "")! }
+    var baseURL: URL { URL(string: "13.124.172.240:8000")! }
     
     var headers: [String : String]? { nil }
     

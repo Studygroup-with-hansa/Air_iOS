@@ -64,7 +64,7 @@ final class MainViewReactor: Reactor {
             state.sectionItems.removeAll()
             
             dataClass.subject.forEach {
-                let percent: Double = Double($0.time % dataClass.totalTime)
+                let percent: Double = Double($0.time) / Double(dataClass.totalTime) * 100
                 state.sectionItems.append(.mainCell(MainViewCellReactor(model: $0, percent: percent)))
             }
 

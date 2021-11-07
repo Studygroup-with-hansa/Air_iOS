@@ -7,12 +7,12 @@
             {
                 "title": "수학",
                 "time": 3,
-                "color": "#ffffff"
+                "color": "#bbbbbb"
             },
             {
                 "title": "국어",
                 "time": 10,
-                "color": "#000000"
+                "color": "#123456"
             }
         ],
         "goal": 10

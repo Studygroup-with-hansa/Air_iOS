@@ -13,6 +13,8 @@ protocol ModelType: Codable, Then {
     static var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy { get }
     
     static var decoder: JSONDecoder { get }
+    
+    var code: Int { get }
 }
 
 extension ModelType {

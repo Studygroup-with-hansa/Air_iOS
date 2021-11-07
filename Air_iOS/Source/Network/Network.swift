@@ -19,22 +19,19 @@ class Network<API: TargetType>: MoyaProvider<API> {
     
     func request(_ api: API) -> Single<Response> {
         return self.rx.request(api)
-            .filterSuccessfulStatusCodes()
+            .filter(statusCodes: 200...500)
     }
 }
 
 extension Network {
-    func requestObject<T: Codable>(_ target: API, type: T.Type) -> Single<T> {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(.serverDate)
+    func requestObject<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithValue<T>> {
+        let decoder = type.decoder
         return request(target)
             .map(T.self, using: decoder)
+            .map { result in
+                guard let error = NetworkError(rawValue: result.code) else { return .success(result) }
+                return .error(error)
+            }.catchErrorJustReturn(.error(.unknown))
     }
-    
-    func requestArray<T: Codable>(_ target: API, type: T.Type) -> Single<[T]> {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(.serverDate)
-        return request(target)
-            .map([T].self, using: decoder)
-    }
+
 }

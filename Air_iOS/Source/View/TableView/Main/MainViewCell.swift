@@ -137,7 +137,7 @@ final class MainViewCell: BaseTableViewCell, View {
             .bind(to: self.timeLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reactor.state.map { $0.percent.toPercentage }.asObservable()
+        reactor.state.map { $0.percent.toPercentage + "%" }.asObservable()
             .distinctUntilChanged()
             .bind(to: self.percentLabel.rx.text)
             .disposed(by: disposeBag)

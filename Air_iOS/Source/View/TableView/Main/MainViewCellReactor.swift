@@ -8,11 +8,13 @@
 import Foundation
 
 import ReactorKit
+import RxFlow
 import RxRelay
 
 final class MainViewCellReactor: Reactor {
     
     let initialState: State
+    let steps: PublishRelay<Step>
     
     enum Action {
         
@@ -29,8 +31,9 @@ final class MainViewCellReactor: Reactor {
         var color: String
     }
     
-    init(model: Subject, percent: Double) {
+    init(model: Subject, percent: Double, steps: PublishRelay<Step>) {
         self.initialState = State(title: model.title, time: model.time, percent: percent, color: model.color)
+        self.steps = steps
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
