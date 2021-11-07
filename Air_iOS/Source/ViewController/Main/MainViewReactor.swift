@@ -8,9 +8,13 @@
 import Foundation
 
 import ReactorKit
+import RxFlow
 import RxRelay
 
-final class MainViewReactor: Reactor {
+final class MainViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
+    
     
     let initialState: State
     
@@ -65,7 +69,7 @@ final class MainViewReactor: Reactor {
             
             dataClass.subject.forEach {
                 let percent: Double = Double($0.time) / Double(dataClass.totalTime) * 100
-                state.sectionItems.append(.mainCell(MainViewCellReactor(model: $0, percent: percent)))
+                state.sectionItems.append(.mainCell(MainViewCellReactor(model: $0, percent: percent, steps: self.steps)))
             }
 
         }

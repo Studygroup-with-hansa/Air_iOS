@@ -21,7 +21,7 @@ struct SubjectDataClass: Codable {
     let goal: Int
 }
 // MARK: - Subject
-struct Subject: ModelType, Equatable {
+struct Subject: Codable, Equatable {
     let title: String
     let time: Int
     let color: String

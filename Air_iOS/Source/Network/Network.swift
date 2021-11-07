@@ -29,7 +29,7 @@ extension Network {
         return request(target)
             .map(T.self, using: decoder)
             .map { result in
-                guard let error = NetworkError(rawValue: result.code) else { return .success(result) }
+                guard let error = NetworkError(rawValue: result.status) else { return .success(result) }
                 return .error(error)
             }.catchErrorJustReturn(.error(.unknown))
     }

@@ -15,14 +15,14 @@ struct Stats: ModelType, Equatable {
 }
 
 // MARK: - DataClass
-struct StatsDataClass: ModelType, Equatable {
+struct StatsDataClass: Codable, Equatable {
     let totalTime, goals: Int
     let achievementRate: Double
     let stats: [Stat]
 }
 
 // MARK: - Stat
-struct Stat: ModelType, Equatable {
+struct Stat: Codable, Equatable {
     let date: Date
     let totalStudyTime: Int
     let achievementRate: Double

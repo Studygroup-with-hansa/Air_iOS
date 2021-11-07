@@ -15,6 +15,6 @@ struct Email: ModelType {
 }
 
 // MARK: - DataClass
-struct EmailDataClass: ModelType {
+struct EmailDataClass: Codable {
     let isEmailExist, emailSent: Bool
 }
