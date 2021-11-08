@@ -12,8 +12,9 @@ struct ViewControllerPreview: PreviewProvider {
     static var previews: some View {
 //        let reactor = LoginViewReactor()
 //        LoginViewController(reactor: reactor).showPreview(.iPhone13Pro)
+        TabBarViewController().showPreview(.iPhone13Pro)
 //        LoginViewContr/oller(reactor: reactor).showPreview(.iPodTouch)
-        MainViewCell().showPreview(width: 343, height: 65)
+//        MainViewCell().showPreview(width: 343, height: 65)
     }
 }
 

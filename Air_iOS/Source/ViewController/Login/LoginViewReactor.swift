@@ -28,8 +28,11 @@ final class LoginViewReactor: Reactor, Stepper {
         
     }
     
-    init() {
+    fileprivate let authService: AuthServiceType
+    init(authService: AuthServiceType) {
         self.initialState = State()
+        
+        self.authService = authService
     }
     
     func mutate(action: Action) -> Observable<Mutation> {

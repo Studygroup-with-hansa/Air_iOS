@@ -10,22 +10,44 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxFlow
+import RxOptional
 import RxViewController
-import SnapKit
-import CGFloatLiteral
-import Rswift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var coordinator: FlowCoordinator = .init()
+    fileprivate let disposeBag = DisposeBag()
+    
+    lazy var appSerivces = {
+        return AppServices()
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = GraphViewController(reactor: GraphViewReactor(userService: UserSercice()))
-        window?.rootViewController = MainViewController(reactor: MainViewReactor())
-        window?.makeKeyAndVisible()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = .systemBackground
+        self.window?.makeKeyAndVisible()
+        
+        guard let window = self.window else { return false }
+        
+        let appFlow = AppFlow(window: window, services: appSerivces)
+        
+        let appStepper = OneStepper(withSingleStep: AirStep.splashIsRequired)
+        
+        // Setup Rxflow
+        self.coordinator.coordinate(flow: appFlow, with: appStepper)
+        
+        
+        coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
+            print ("will navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
+        
+        coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
+            print ("did navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
         
         return true
     }

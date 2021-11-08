@@ -6,8 +6,11 @@
 //
 
 import RxSwift
+import KeychainAccess
 
 protocol AuthServiceType {
+    var currentToken: Token? { get }
+    
     func requestCode(_ email: String) -> Single<Void>
     func sendCode(_ email: String, _ code: String) -> Single<Void>
 }
@@ -15,6 +18,8 @@ protocol AuthServiceType {
 final class AuthService: AuthServiceType {
     
     fileprivate let network: Network<AuthAPI>
+    fileprivate let keychain = Keychain(service: "com.hansarang.ios.air.Air-iOS")
+    private(set) var currentToken: Token?
     
     init(network: Network<AuthAPI>) {
         self.network = network

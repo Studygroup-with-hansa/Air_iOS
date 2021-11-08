@@ -22,6 +22,7 @@ target 'Air_iOS' do
   pod 'RxTheme'
   pod 'RxGesture'
   pod 'RxFlow'
+  pod 'RxOptional'
   
   # Network
   pod 'Moya/RxSwift'

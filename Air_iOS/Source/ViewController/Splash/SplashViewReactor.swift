@@ -1,8 +1,8 @@
 //
-//  RegisterViewReactor.swift
+//  SplashViewReactor.swift
 //  Air_iOS
 //
-//  Created by 김부성 on 2021/09/28.
+//  Created by 김부성 on 2021/11/07.
 //
 
 import Foundation
@@ -11,18 +11,17 @@ import ReactorKit
 import RxRelay
 import RxFlow
 
-final class RegisterViewReactor: Reactor, Stepper {
-    var steps = PublishRelay<Step>()
+final class SplashViewReactor: Reactor, Stepper {
+    
+    var steps: PublishRelay<Step> = PublishRelay<Step>()
     
     let initialState: State
     
     enum Action {
-        
+        case setNextView
     }
     
-    enum Mutation {
-        
-    }
+    typealias Mutation = NoMutation
     
     struct State {
         
@@ -36,10 +35,15 @@ final class RegisterViewReactor: Reactor, Stepper {
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
-        
+        switch action {
+        case .setNextView:
+            self.steps.accept(AirStep.loginIsRequired)
+            return Observable.empty()
+        }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         
     }
 }
+
