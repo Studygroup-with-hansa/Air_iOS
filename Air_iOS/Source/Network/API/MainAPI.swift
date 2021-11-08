@@ -17,6 +17,9 @@ enum MainAPI {
     case makeSubject(_ title: String, _ color: String)
     case deleteSubject(_ title: String)
     case updateSubject(_ newTitle: String, _ title: String, _ color: String)
+    
+    // Stats
+    case getStats
 }
 
 extension MainAPI: BaseAPI {
@@ -29,7 +32,7 @@ extension MainAPI: BaseAPI {
             return "/user/timer/stop/"
             
         case .getSubjectList:
-            return "/user/data/subject/"
+            return "/user/data/subject/history/"
             
         case .makeSubject:
             return "/user/data/subject/manage/"
@@ -39,12 +42,15 @@ extension MainAPI: BaseAPI {
             
         case .updateSubject:
             return "/user/data/subject/manage/"
+            
+        case .getStats:
+            return "/user/data/stats/"
         }
     }
     
     var headers: [String : String]? {
         return [
-            "Content-Type" : "application/x-www-form-urlencoded"
+            "Content-Type" : "application/json"
         ]
     }
     
@@ -73,6 +79,12 @@ extension MainAPI: BaseAPI {
                 "color" : color
             ]
             
+        case .getStats:
+            return [
+                "startDate" : Date().weekAgo.dataString,
+                "endDate" : Date().dataString
+            ]
+            
         default:
             return nil
         }
@@ -80,10 +92,7 @@ extension MainAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .getSubjectList:
-            return .get
-            
-        case .startTimer, .stopTimer, .makeSubject:
+        case .startTimer, .stopTimer, .makeSubject, .getStats, .getSubjectList:
             return .post
             
         case .deleteSubject:

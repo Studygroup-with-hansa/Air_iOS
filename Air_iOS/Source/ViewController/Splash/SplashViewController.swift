@@ -69,8 +69,6 @@ class SplashViewController: BaseViewController, View {
             $0.width.equalTo(Metric.imageWidth)
             $0.height.equalTo(Metric.imageHeight)
             $0.center.equalToSuperview()
-//            $0.centerY.equalToSafeArea(self.view).offset(-Metric.imageY)
-//            $0.centerX.equalToSafeArea(self.view)
         }
         
     }

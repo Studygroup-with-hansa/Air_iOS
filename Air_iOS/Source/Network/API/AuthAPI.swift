@@ -27,7 +27,7 @@ extension AuthAPI: BaseAPI {
         switch self {
         case .requestEmailCode:
             return [
-                "Content-Type" : "application/x-www-form-urlencoded"
+                "Content-Type" : "application/json"
             ]
         case .sendEmailCode:
             return nil
@@ -51,7 +51,7 @@ extension AuthAPI: BaseAPI {
     var method: Moya.Method {
         switch self {
         case .requestEmailCode:
-            return .get
+            return .post
             
         case .sendEmailCode:
             return .put

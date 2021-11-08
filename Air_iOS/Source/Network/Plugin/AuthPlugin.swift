@@ -17,9 +17,8 @@ struct AuthPlugin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
         if let token = self.authService.currentToken {
-            request.addValue(token, forHTTPHeaderField: "Authorization")
+            request.addValue("Token " + token, forHTTPHeaderField: "Authorization")
         }
         return request
     }
 }
-

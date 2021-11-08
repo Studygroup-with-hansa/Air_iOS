@@ -58,6 +58,9 @@ final class LoginViewController: BaseViewController, View {
     let emailTextField = AirTextField().then {
         $0.titleLabel.text = "이메일"
         $0.placeholder.text = "이메일을 입력해주세요"
+        $0.textField.autocapitalizationType = .none
+        $0.textField.autocorrectionType = .no
+        $0.textField.keyboardType = .emailAddress
     }
     
     let sendCodeButton = SendCodeButton()
@@ -65,6 +68,8 @@ final class LoginViewController: BaseViewController, View {
     let codeTextField = AirTextField().then {
         $0.titleLabel.text = "인증코드"
         $0.placeholder.text = "인증 코드를 입력해주세요"
+        $0.textField.autocorrectionType = .no
+        $0.textField.keyboardType = .default
     }
     
     let loginButton = AirPlainButton().then {
@@ -153,5 +158,28 @@ final class LoginViewController: BaseViewController, View {
     // MARK: - Configuring
     func bind(reactor: LoginViewReactor) {
         
+        Observable.combineLatest(
+            self.emailTextField.textField.rx.text.orEmpty,
+            self.codeTextField.textField.rx.text.orEmpty
+        )
+        .observeOn(MainScheduler.asyncInstance)
+        .map { Reactor.Action.updateTextField([$0, $1]) }
+        .bind(to: reactor.action)
+        .disposed(by: disposeBag)
+        
+        self.sendCodeButton.rx.tap.asObservable()
+            .map { Reactor.Action.requestCode }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.loginButton.rx.tap.asObservable()
+            .map { Reactor.Action.sendCode }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.isLoading }.asObservable()
+            .distinctUntilChanged()
+            .bind(to: self.activityIndicatorView.rx.isAnimating)
+            .disposed(by: disposeBag)
     }
 }

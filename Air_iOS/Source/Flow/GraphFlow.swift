@@ -37,9 +37,9 @@ class GraphFlow: Flow {
         guard let step = step as? AirStep else { return .none }
         
         switch step {
-        // 홈 화면
-        case .homeIsRequired:
-            return self.navigateToGraph(userService: services.userService)
+            
+        case .graphIsRequired:
+            return navigateToGraph()
             
         default:
             return .none
@@ -48,8 +48,8 @@ class GraphFlow: Flow {
 }
 
 extension GraphFlow {
-    private func navigateToGraph(userService: UserServiceType) -> FlowContributors {
-        let reactor = GraphViewReactor(userService: userService)
+    private func navigateToGraph() -> FlowContributors {
+        let reactor = GraphViewReactor(airAuthService: services.airAuthService, userService: services.userService)
         let viewController = GraphViewController(reactor: reactor)
         
         self.rootViewController.pushViewController(viewController, animated: true)

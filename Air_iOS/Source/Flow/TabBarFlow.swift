@@ -31,8 +31,7 @@ final class TabBarFlow: Flow {
         
         switch step {
         case .mainTabBarIsRequired:
-            return .none
-//            return navigateToTabBar()
+            return navigateToTabBar()
             
         case .splashIsRequired:
             return .end(forwardToParentFlowWithStep: AirStep.splashIsRequired)
@@ -49,10 +48,10 @@ extension TabBarFlow {
         let graphFlow = GraphFlow(self.services)
 
         Flows.use(homeFlow, graphFlow, when: .created) { [unowned self] (root1, root2: UINavigationController) in
-            let tabBarItem1 = UITabBarItem(title: "홈", image: UIImage(systemName: "Home"), selectedImage: nil)
+            let tabBarItem1 = UITabBarItem(title: "홈", image: R.image.air_logo(), selectedImage: nil)
             root1.tabBarItem = tabBarItem1
 
-            let tabBarItem2 = UITabBarItem(title: "설정", image: UIImage(systemName: "gears"), selectedImage: nil)
+            let tabBarItem2 = UITabBarItem(title: "설정", image: R.image.air_logo(), selectedImage: nil)
             root2.tabBarItem = tabBarItem2
 
             self.rootViewController.setViewControllers([root1, root2], animated: false)

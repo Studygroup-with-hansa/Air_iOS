@@ -78,6 +78,7 @@
 		62C2E47D2738F25E00F037B9 /* AirAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E47C2738F25E00F037B9 /* AirAuthService.swift */; };
 		62C2E47F2738F3B000F037B9 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E47E2738F3B000F037B9 /* ServerResponse.swift */; };
 		62C2E4812738F8EA00F037B9 /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E4802738F8EA00F037B9 /* AuthPlugin.swift */; };
+		62C2E4832738FEBF00F037B9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E4822738FEBF00F037B9 /* Message.swift */; };
 		62EE3752270171E000ABFCD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE3751270171E000ABFCD2 /* BaseViewController.swift */; };
 		BFE942F5FC48C5191A355A21 /* Pods_Air_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */; };
 		C8403D7F7883670F9F1D8E11 /* Pods_Air_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0498C5F8C53219455FCD9D6 /* Pods_Air_iOSTests.framework */; };
@@ -183,6 +184,7 @@
 		62C2E47C2738F25E00F037B9 /* AirAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirAuthService.swift; sourceTree = "<group>"; };
 		62C2E47E2738F3B000F037B9 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
 		62C2E4802738F8EA00F037B9 /* AuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
+		62C2E4822738FEBF00F037B9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		62EE3751270171E000ABFCD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD06138C1C45249565EF0E /* Pods-Air_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Air_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Air_iOSTests/Pods-Air_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -356,13 +358,13 @@
 		6229F26C26F1732300B51EBA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				62C2E4742738DB4500F037B9 /* TabBarViewController.swift */,
 				62C2E45F2737FD7700F037B9 /* Splash */,
+				62A9A4012701966A001E2343 /* Login */,
+				621D3DB72702D875003FEA9F /* Register */,
 				624A4ABA272FC5E8006C8F5E /* Main */,
 				62B42F4F2704381200D2060A /* Graph */,
-				621D3DB72702D875003FEA9F /* Register */,
-				62A9A4012701966A001E2343 /* Login */,
 				627E9BB22703604800A2C5A1 /* Timer */,
-				62C2E4742738DB4500F037B9 /* TabBarViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -370,11 +372,11 @@
 		6229F26F26F1BF5C00B51EBA /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				62C2E45C2737F93000F037B9 /* Plugin */,
 				6229F27026F1BF7C00B51EBA /* Network.swift */,
 				62C2E4442736A49C00F037B9 /* NetworkError.swift */,
 				62C2E4422736A45F00F037B9 /* NetworkResult.swift */,
 				6229F27626F20F0A00B51EBA /* API */,
+				62C2E45C2737F93000F037B9 /* Plugin */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -472,6 +474,7 @@
 				62A9A3F92701930A001E2343 /* DeviceType.swift */,
 				62A9A3FB2701940D001E2343 /* UIViewPreview.swift.swift */,
 				62A9A3FD27019425001E2343 /* UIViewControllerPreview.swift */,
+				62C2E4822738FEBF00F037B9 /* Message.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				62A9A3FC2701940D001E2343 /* UIViewPreview.swift.swift in Sources */,
 				62C08725271810D6009D34A7 /* BaseTableViewCell.swift in Sources */,
 				626AC5A72730C7F900E907E8 /* MainSection.swift in Sources */,
+				62C2E4832738FEBF00F037B9 /* Message.swift in Sources */,
 				62C2E4712738C78700F037B9 /* LoginFlow.swift in Sources */,
 				62C2E47F2738F3B000F037B9 /* ServerResponse.swift in Sources */,
 				62AB75732703E63D0090169D /* String.swift in Sources */,

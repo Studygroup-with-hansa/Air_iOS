@@ -14,13 +14,21 @@ struct AppServices {
     
     let authService: AuthServiceType
     let userService: UserServiceType
+    let airAuthService: AirAuthServiceType
     
     init() {
+        self.userService = UserSercice()
+        
         let authNetwork = Network<AuthAPI>(plugins: [
             RequestLoggingPlugin()
         ])
         self.authService = AuthService(network: authNetwork)
-        self.userService = UserSercice()
+        
+        let airAuthNetwork = Network<MainAPI>(plugins: [
+            RequestLoggingPlugin(),
+            AuthPlugin(authService: self.authService)
+        ])
+        self.airAuthService = AirAuthService(network: airAuthNetwork)
     }
     
 }

@@ -16,12 +16,8 @@ class HomeFlow: Flow {
         return self.rootViewController
     }
     
-    let navigationAppearance = UINavigationBarAppearance().then {
-        $0.configureWithDefaultBackground()
-    }
-    
     private lazy var rootViewController = UINavigationController().then {
-        $0.navigationBar.standardAppearance = navigationAppearance
+        $0.navigationBar.isHidden = true
     }
     
     // MARK: - Init
@@ -39,7 +35,7 @@ class HomeFlow: Flow {
         switch step {
         // 홈 화면
         case .homeIsRequired:
-            return self.navigateToHome()
+            return self.navigateToHome(airAuthService: services.airAuthService)
             
         default:
             return .none
@@ -48,8 +44,8 @@ class HomeFlow: Flow {
 }
 
 extension HomeFlow {
-    private func navigateToHome() -> FlowContributors {
-    let reactor = MainViewReactor()
+    private func navigateToHome(airAuthService: AirAuthServiceType) -> FlowContributors {
+        let reactor = MainViewReactor(airAuthService: airAuthService)
     let viewController = MainViewController(reactor: reactor)
     
     self.rootViewController.pushViewController(viewController, animated: false)

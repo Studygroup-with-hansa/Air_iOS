@@ -8,6 +8,7 @@
 import Foundation
 
 import ReactorKit
+import SwiftMessages
 import RxFlow
 import RxRelay
 
@@ -24,12 +25,14 @@ final class MainViewReactor: Reactor, Stepper {
     
     enum Mutation {
         case updateData(SubjectDataClass?)
+        case setLoading(Bool)
     }
     
     struct State {
         var totalTime: Int = 0
         var goal: Int = 0
         var subject: [Subject] = []
+        var isLoading: Bool = false
         
         var sectionItems: [MainSectionItem] = []
         var sections: [MainSection] {
@@ -40,17 +43,34 @@ final class MainViewReactor: Reactor, Stepper {
         }
     }
     
-    init() {
+    let airAuthService: AirAuthServiceType
+    
+    init(airAuthService: AirAuthServiceType) {
         self.initialState = State()
+        
+        self.airAuthService = airAuthService
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refreshData:
-            guard let path = Bundle.main.path(forResource: "MainMock", ofType: "json") else { return Observable.empty() }
-            guard let jsonString = try? String(contentsOfFile: path) else { return Observable.empty() }
-            let subjects = try? Stats.decoder.decode(Subjects.self, from: jsonString.data(using: .utf8)!)
-            return Observable.just(Mutation.updateData(subjects?.data))
+            return Observable.concat([
+                Observable.just(Mutation.setLoading(true)),
+                
+                self.airAuthService.getSubjectList().asObservable()
+                    .map { result in
+                        switch result {
+                        case let .success(result):
+                            return Mutation.updateData(result.data)
+                        case let .error(error):
+                            print(error)
+                            SwiftMessages.show(config: Message.airConfig, view: Message.faildView(error.message))
+                            return Mutation.updateData(nil)
+                        }
+                    },
+                
+                Observable.just(Mutation.setLoading(false))
+            ])
         }
     }
     
@@ -71,7 +91,9 @@ final class MainViewReactor: Reactor, Stepper {
                 let percent: Double = Double($0.time) / Double(dataClass.totalTime) * 100
                 state.sectionItems.append(.mainCell(MainViewCellReactor(model: $0, percent: percent, steps: self.steps)))
             }
-
+            
+        case let .setLoading(isLoading):
+            state.isLoading = isLoading
         }
         
         return state

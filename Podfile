@@ -8,6 +8,7 @@ target 'Air_iOS' do
   # UI
   pod 'SnapKit'
   pod 'Charts'
+  pod 'SwiftMessages'
 
   # Architecture
   pod 'ReactorKit'

@@ -18,7 +18,7 @@ final class MainViewController: BaseViewController, View {
     
     // MARK: - Constants
     fileprivate struct Metric {
-        static let colorViewRatio = 3.5.f
+        static let colorViewRatio = 2.5.f
         static let addButtonSize = 24.f
         static let viewSide = 20.f
         static let dateLabelBottom = 10.f
@@ -123,7 +123,8 @@ final class MainViewController: BaseViewController, View {
         super.setupConstraints()
         
         self.colorView.snp.makeConstraints {
-            $0.top.left.right.equalToSafeArea(self.view)
+            $0.top.equalToSuperview()
+            $0.left.right.equalToSafeArea(self.view)
             $0.height.equalToSuperview().dividedBy(Metric.colorViewRatio)
         }
         

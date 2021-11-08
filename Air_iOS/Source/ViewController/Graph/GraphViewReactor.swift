@@ -10,6 +10,7 @@ import Foundation
 import ReactorKit
 import RxRelay
 import RxFlow
+import SwiftMessages
 
 final class GraphViewReactor: Reactor, Stepper {
     var steps = PublishRelay<Step>()
@@ -23,6 +24,7 @@ final class GraphViewReactor: Reactor, Stepper {
     
     enum Mutation {
         case updateData(StatsDataClass?, Int?)
+        case setLoading(Bool)
     }
     
     struct State {
@@ -32,6 +34,7 @@ final class GraphViewReactor: Reactor, Stepper {
         var totalTime: Int = 0
         var goal: Int = 0
         var percent: Double = 0
+        var isLoading: Bool = false
         
         var legendSectionItems: [GraphLegendSectionItem] = []
         var legendSections: [GraphLegendSection] {
@@ -43,20 +46,35 @@ final class GraphViewReactor: Reactor, Stepper {
     }
     
     let userService: UserServiceType
+    fileprivate let airAuthService: AirAuthServiceType
     
-    init(userService: UserServiceType) {
+    init(airAuthService: AirAuthServiceType, userService: UserServiceType) {
         self.initialState = State()
         
+        self.airAuthService = airAuthService
         self.userService = userService
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refreshData:
-            guard let path = Bundle.main.path(forResource: "StatsMock", ofType: "json") else { return Observable.empty() }
-            guard let jsonString = try? String(contentsOfFile: path) else { return Observable.empty() }
-            let stats = try? Stats.decoder.decode(Stats.self, from: jsonString.data(using: .utf8)!)
-            return Observable.just(Mutation.updateData(stats?.data, currentState.currentIndex))
+            return Observable.concat([
+                Observable.just(Mutation.setLoading(true)),
+                
+                self.airAuthService.getStatList().asObservable()
+                    .map { [weak self] result in
+                        switch result {
+                        case let .success(result):
+                            return Mutation.updateData(result.data, self?.currentState.currentIndex)
+                        case let .error(error):
+                            print(error)
+                            SwiftMessages.show(config: Message.airConfig, view: Message.faildView(error.message))
+                            return Mutation.updateData(nil, self?.currentState.currentIndex)
+                        }
+                    },
+                
+                Observable.just(Mutation.setLoading(false))
+            ])
             
         case let .selectDay(idx):
             return Observable.just(Mutation.updateData(currentState.dataClass, idx))
@@ -99,6 +117,9 @@ final class GraphViewReactor: Reactor, Stepper {
             stat.subject.forEach {
                 state.legendSectionItems.append(.legend(GraphViewLegendReactor(model: $0)))
             }
+            
+        case let .setLoading(isLoading):
+            state.isLoading = isLoading
         }
         
         return state

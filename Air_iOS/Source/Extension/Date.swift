@@ -31,4 +31,15 @@ public extension Date {
         }
         return formatter.string(from: self)
     }
+    
+    var dataString: String {
+        let formatter = DateFormatter().then {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        return formatter.string(from: self)
+    }
+    
+    var weekAgo: Date {
+        return Date(timeIntervalSinceNow: -86400 * 6)
+    }
 }

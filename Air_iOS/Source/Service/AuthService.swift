@@ -8,10 +8,10 @@
 import RxSwift
 import KeychainAccess
 
-protocol AuthServiceType {
+protocol AuthServiceType: AnyObject {
     var currentToken: String? { get }
     
-    func requestCode(_ email: String) -> Single<NetworkResult>
+    func requestCode(_ email: String) -> Single<NetworkResultWithValue<ServerResponse<EmailDataClass>>>
     func sendCode(_ email: String, _ code: String) -> Single<NetworkResult>
 }
 
@@ -26,12 +26,12 @@ final class AuthService: AuthServiceType {
         self.currentToken = self.getToken()
     }
     
-    func requestCode(_ email: String) -> Single<NetworkResult> {
+    func requestCode(_ email: String) -> Single<NetworkResultWithValue<ServerResponse<EmailDataClass>>> {
         return network.requestObject(.requestEmailCode(email), type: ServerResponse<EmailDataClass>.self)
             .map { result in
                 switch result {
-                case .success(_):
-                    return .success
+                case let .success(result):
+                    return .success(result)
                 case let .error(error):
                     return .error(error)
                 }
