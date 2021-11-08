@@ -25,16 +25,12 @@
 		6229F27C26F2E6E200B51EBA /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F27B26F2E6E100B51EBA /* AuthAPI.swift */; };
 		6229F27F26F310D500B51EBA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F27E26F310D500B51EBA /* AuthService.swift */; };
 		6229F28426F320E300B51EBA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28326F320E300B51EBA /* ModelType.swift */; };
-		6229F28626F3216600B51EBA /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28526F3216600B51EBA /* Token.swift */; };
-		6229F28826F3229B00B51EBA /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6229F28726F3229B00B51EBA /* Email.swift */; };
-		62452448270D7AB700DE083D /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62452447270D7AB700DE083D /* Stats.swift */; };
 		6245244A270D7DB500DE083D /* StatsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 62452449270D7DB500DE083D /* StatsMock.json */; };
 		6245244E270DBEC000DE083D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6245244D270DBEC000DE083D /* Double.swift */; };
 		624A4AB9272EADE4006C8F5E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A4AB8272EADE4006C8F5E /* UserService.swift */; };
 		624A4ABC272FC603006C8F5E /* MainViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A4ABB272FC603006C8F5E /* MainViewReactor.swift */; };
 		624A4ABE272FC696006C8F5E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A4ABD272FC696006C8F5E /* MainViewController.swift */; };
 		624A4AC0272FC8B9006C8F5E /* MainMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 624A4ABF272FC8B9006C8F5E /* MainMock.json */; };
-		624A4AC3272FC91B006C8F5E /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A4AC2272FC91B006C8F5E /* Subject.swift */; };
 		62537220271BB77C00165834 /* DatePickerDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6253721F271BB77C00165834 /* DatePickerDateCell.swift */; };
 		62537222271BB7C200165834 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62537221271BB7C200165834 /* BaseCollectionViewCell.swift */; };
 		62537224271BD29200165834 /* DatePickerDateReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62537223271BD29200165834 /* DatePickerDateReactor.swift */; };
@@ -79,6 +75,9 @@
 		62C2E4772738E62000F037B9 /* GraphFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E4762738E62000F037B9 /* GraphFlow.swift */; };
 		62C2E4792738E69A00F037B9 /* HomeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E4782738E69A00F037B9 /* HomeFlow.swift */; };
 		62C2E47B2738E6E100F037B9 /* SettingsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E47A2738E6E100F037B9 /* SettingsFlow.swift */; };
+		62C2E47D2738F25E00F037B9 /* AirAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E47C2738F25E00F037B9 /* AirAuthService.swift */; };
+		62C2E47F2738F3B000F037B9 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E47E2738F3B000F037B9 /* ServerResponse.swift */; };
+		62C2E4812738F8EA00F037B9 /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E4802738F8EA00F037B9 /* AuthPlugin.swift */; };
 		62EE3752270171E000ABFCD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE3751270171E000ABFCD2 /* BaseViewController.swift */; };
 		BFE942F5FC48C5191A355A21 /* Pods_Air_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */; };
 		C8403D7F7883670F9F1D8E11 /* Pods_Air_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0498C5F8C53219455FCD9D6 /* Pods_Air_iOSTests.framework */; };
@@ -131,16 +130,12 @@
 		6229F27B26F2E6E100B51EBA /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		6229F27E26F310D500B51EBA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6229F28326F320E300B51EBA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
-		6229F28526F3216600B51EBA /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		6229F28726F3229B00B51EBA /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
-		62452447270D7AB700DE083D /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		62452449270D7DB500DE083D /* StatsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StatsMock.json; sourceTree = "<group>"; };
 		6245244D270DBEC000DE083D /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		624A4AB8272EADE4006C8F5E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		624A4ABB272FC603006C8F5E /* MainViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewReactor.swift; sourceTree = "<group>"; };
 		624A4ABD272FC696006C8F5E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		624A4ABF272FC8B9006C8F5E /* MainMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MainMock.json; sourceTree = "<group>"; };
-		624A4AC2272FC91B006C8F5E /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		6253721F271BB77C00165834 /* DatePickerDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDateCell.swift; sourceTree = "<group>"; };
 		62537221271BB7C200165834 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		62537223271BD29200165834 /* DatePickerDateReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDateReactor.swift; sourceTree = "<group>"; };
@@ -185,6 +180,9 @@
 		62C2E4762738E62000F037B9 /* GraphFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFlow.swift; sourceTree = "<group>"; };
 		62C2E4782738E69A00F037B9 /* HomeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlow.swift; sourceTree = "<group>"; };
 		62C2E47A2738E6E100F037B9 /* SettingsFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFlow.swift; sourceTree = "<group>"; };
+		62C2E47C2738F25E00F037B9 /* AirAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirAuthService.swift; sourceTree = "<group>"; };
+		62C2E47E2738F3B000F037B9 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
+		62C2E4802738F8EA00F037B9 /* AuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
 		62EE3751270171E000ABFCD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8941DB28E27ADD54353820D7 /* Pods_Air_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Air_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD06138C1C45249565EF0E /* Pods-Air_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Air_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Air_iOSTests/Pods-Air_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -409,6 +407,7 @@
 			children = (
 				6229F27E26F310D500B51EBA /* AuthService.swift */,
 				624A4AB8272EADE4006C8F5E /* UserService.swift */,
+				62C2E47C2738F25E00F037B9 /* AirAuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -417,10 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				6229F28326F320E300B51EBA /* ModelType.swift */,
-				6229F28526F3216600B51EBA /* Token.swift */,
-				6229F28726F3229B00B51EBA /* Email.swift */,
-				62452447270D7AB700DE083D /* Stats.swift */,
-				624A4AC2272FC91B006C8F5E /* Subject.swift */,
+				62C2E47E2738F3B000F037B9 /* ServerResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -573,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				62C2E45D2737F94800F037B9 /* RequestLoggingPlugin.swift */,
+				62C2E4802738F8EA00F037B9 /* AuthPlugin.swift */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -881,7 +878,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				62A9A40527019729001E2343 /* LoginViewController.swift in Sources */,
-				62452448270D7AB700DE083D /* Stats.swift in Sources */,
 				6229F26E26F1B84500B51EBA /* AppServices.swift in Sources */,
 				62C2E4572737EB2900F037B9 /* AppSteppeer.swift in Sources */,
 				62C2E4752738DB4500F037B9 /* TabBarViewController.swift in Sources */,
@@ -890,6 +886,7 @@
 				621D3DBE2702DAA0003FEA9F /* R.generated.swift in Sources */,
 				62537222271BB7C200165834 /* BaseCollectionViewCell.swift in Sources */,
 				62C08723271810AA009D34A7 /* GraphViewLegendCell.swift in Sources */,
+				62C2E4812738F8EA00F037B9 /* AuthPlugin.swift in Sources */,
 				62A9A41227021C0B001E2343 /* Snapkit.swift in Sources */,
 				62B42F58270467E500D2060A /* ChartMarker.swift in Sources */,
 				62B42F512704383F00D2060A /* GraphViewReactor.swift in Sources */,
@@ -901,10 +898,10 @@
 				62537220271BB77C00165834 /* DatePickerDateCell.swift in Sources */,
 				62C2E45B2737F6A700F037B9 /* SplashViewReactor.swift in Sources */,
 				62C2E4732738D17C00F037B9 /* TabBarFlow.swift in Sources */,
-				6229F28826F3229B00B51EBA /* Email.swift in Sources */,
 				6245244E270DBEC000DE083D /* Double.swift in Sources */,
 				62A9A40B2701DA0B001E2343 /* AirTextField.swift in Sources */,
 				62C0872A27181C56009D34A7 /* GraphLegendSection.swift.swift in Sources */,
+				62C2E47D2738F25E00F037B9 /* AirAuthService.swift in Sources */,
 				62BFD582271D6C0F001815BD /* Date.swift in Sources */,
 				6229F27A26F210CD00B51EBA /* MainAPI.swift in Sources */,
 				6229F27F26F310D500B51EBA /* AuthService.swift in Sources */,
@@ -920,6 +917,7 @@
 				62C08725271810D6009D34A7 /* BaseTableViewCell.swift in Sources */,
 				626AC5A72730C7F900E907E8 /* MainSection.swift in Sources */,
 				62C2E4712738C78700F037B9 /* LoginFlow.swift in Sources */,
+				62C2E47F2738F3B000F037B9 /* ServerResponse.swift in Sources */,
 				62AB75732703E63D0090169D /* String.swift in Sources */,
 				624A4AB9272EADE4006C8F5E /* UserService.swift in Sources */,
 				62C2E4452736A49C00F037B9 /* NetworkError.swift in Sources */,
@@ -930,8 +928,6 @@
 				6263E6B1272FFB7300B4BECA /* MainViewCell.swift in Sources */,
 				62537224271BD29200165834 /* DatePickerDateReactor.swift in Sources */,
 				6229F27C26F2E6E200B51EBA /* AuthAPI.swift in Sources */,
-				624A4AC3272FC91B006C8F5E /* Subject.swift in Sources */,
-				6229F28626F3216600B51EBA /* Token.swift in Sources */,
 				621D3DB92702D89A003FEA9F /* RegisterViewReactor.swift in Sources */,
 				62C2E4772738E62000F037B9 /* GraphFlow.swift in Sources */,
 				624A4ABE272FC696006C8F5E /* MainViewController.swift in Sources */,

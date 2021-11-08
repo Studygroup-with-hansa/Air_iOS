@@ -24,9 +24,14 @@ extension AuthAPI: BaseAPI {
     }
     
     var headers: [String : String]? {
-        return [
-            "Content-Type" : "application/x-www-form-urlencoded"
-        ]
+        switch self {
+        case .requestEmailCode:
+            return [
+                "Content-Type" : "application/x-www-form-urlencoded"
+            ]
+        case .sendEmailCode:
+            return nil
+        }
     }
     
     var parameters: [String : Any]? {
@@ -49,7 +54,7 @@ extension AuthAPI: BaseAPI {
             return .get
             
         case .sendEmailCode:
-            return .post
+            return .put
         }
     }
     
@@ -58,8 +63,15 @@ extension AuthAPI: BaseAPI {
     }
     
     var task: Task {
-        if let parameters = parameters {
-            return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+        switch self {
+        case .sendEmailCode:
+            if let parameters = parameters {
+                return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+            }
+        default:
+            if let parameters = parameters {
+                return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+            }
         }
         return .requestPlain
     }

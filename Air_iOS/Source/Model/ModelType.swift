@@ -15,6 +15,8 @@ protocol ModelType: Codable, Then {
     static var decoder: JSONDecoder { get }
     
     var status: Int { get }
+    
+    var detail: String { get }
 }
 
 extension ModelType {
